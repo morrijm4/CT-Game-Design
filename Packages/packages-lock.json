@@ -1,14 +1,13 @@
 {
   "dependencies": {
     "com.gameassemblylab.gameassemblies": {
-      "version": "git@github.com:jomasan/Game-Assemblies-Package.git",
+      "version": "file:Game-Assemblies-Package",
       "depth": 0,
-      "source": "git",
+      "source": "embedded",
       "dependencies": {
         "com.unity.textmeshpro": "3.0.0",
         "com.unity.inputsystem": "1.17.0"
-      },
-      "hash": "3e9b3b516075eed37fc891f6915d2779bc3c8d2c"
+      }
     },
     "com.unity.ai.navigation": {
       "version": "2.0.10",
@@ -65,7 +64,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.inputsystem": {
-      "version": "1.17.0",
+      "version": "1.18.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {
