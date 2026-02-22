@@ -1,4 +1,7 @@
 ﻿<Solution>
+  <Project Path="GameAssemblyLab.GameAssemblies.csproj" />
+  <Project Path="GameAssemblyLab.GameAssemblies.Editor.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="GameAssemblyLab.TestPackage.Editor.Tests.csproj" />
 </Solution>

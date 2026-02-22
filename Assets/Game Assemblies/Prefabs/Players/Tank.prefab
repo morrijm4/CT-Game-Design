@@ -113,7 +113,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 820405171, guid: e6ca452121e02de43a403b6b9a449fd6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5e912b706e68d419e990a7ac2383a460, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 2472388205221193531}
   - component: {fileID: 855185347071884907}
   m_Layer: 0
-  m_Name: Player_Custom
+  m_Name: Tank
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -317,7 +317,7 @@ MonoBehaviour:
     m_ActionId: a3e574b9-2d9a-44de-8c1c-526dade39c9f
     m_ActionName: 'Player/Fire 6[/XInputControllerWindows/rightShoulder]'
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Joystick
+  m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -336,8 +336,8 @@ MonoBehaviour:
   cManager: {fileID: 0}
   gameManager: {fileID: 0}
   playerInputComponent: {fileID: 0}
-  sprite1: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  sprite2: {fileID: 820405171, guid: b9f690056955d4afeb016d855831050a, type: 3}
+  sprite1: {fileID: 21300000, guid: 5e912b706e68d419e990a7ac2383a460, type: 3}
+  sprite2: {fileID: 21300000, guid: cfa199f7e8cd54ffdb2d1fc4f8e3f8de, type: 3}
   sprite3: {fileID: 820405171, guid: b9f690056955d4afeb016d855831050a, type: 3}
   sprite4: {fileID: 820405171, guid: b9f690056955d4afeb016d855831050a, type: 3}
   characterSprites: []

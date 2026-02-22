@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.gameassemblylab.gameassemblies": {
-      "version": "file:Game-Assemblies-Package",
+      "version": "file:com.gameassemblylab.gameassemblies",
       "depth": 0,
       "source": "embedded",
       "dependencies": {
@@ -60,12 +60,12 @@
       "source": "builtin",
       "dependencies": {}
     },
-    "com.unity.ide.rider": {
-      "version": "3.0.39",
+    "com.unity.ide.visualstudio": {
+      "version": "2.0.27",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.ext.nunit": "1.0.6"
+        "com.unity.test-framework": "1.1.33"
       },
       "url": "https://packages.unity.com"
     },

@@ -846,6 +846,14 @@ PrefabInstance:
       propertyPath: timerModule
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 611859560661404430, guid: 5e5843b85f91c52459dab5b139254b52, type: 3}
+      propertyPath: playerJoinPanels.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 611859560661404430, guid: 5e5843b85f91c52459dab5b139254b52, type: 3}
+      propertyPath: 'playerJoinPanels.Array.data[2]'
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2087524100395529100, guid: 5e5843b85f91c52459dab5b139254b52, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -1039,7 +1047,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 52743109059063064, guid: 5e5843b85f91c52459dab5b139254b52, type: 3}
+    - {fileID: 4410986452836113505, guid: 5e5843b85f91c52459dab5b139254b52, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e5843b85f91c52459dab5b139254b52, type: 3}
