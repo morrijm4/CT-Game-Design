@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4519628573390138988}
   - component: {fileID: 4614873178216128113}
   m_Layer: 7
-  m_Name: Flag
+  m_Name: Pellet
   m_TagString: Grabbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,14 +33,13 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.839, y: -0.935, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8496677950763122937
 SpriteRenderer:
-  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -59,8 +58,6 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,12 +79,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 20
-  m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 099b5e019818c405dbf8dd6efeb93bc6, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -1097591567, guid: 3ceb6a21a6816004b8c4c1d777b0ca36, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,6 +91,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &3646296993270124265
 MonoBehaviour:
@@ -116,7 +112,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116237097334872513}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe8a69a754628a34b9dc5450f3045e9b, type: 3}
   m_Name: 
@@ -198,11 +194,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ef57e81cf9b3442847f35dc407f97a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceType: {fileID: 11400000, guid: b27011e8514404f11bb1886ff0f89945, type: 2}
+  resourceType: {fileID: 11400000, guid: f58fea2498e951343b96ce6b83b23aef, type: 2}
   amount: 1
   owner: {fileID: 0}
   rManager: {fileID: 0}
+  typeOfBehavior: 0
   hasOwner: 1
+  lifespan: 2
   currentLife: 0
   particlePrefab: {fileID: 5691416925681980210, guid: d1f3bd356c1954c438923eb037a99247, type: 3}
 --- !u!114 &4614873178216128113

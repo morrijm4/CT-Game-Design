@@ -6,8 +6,6 @@ public enum TagType
     Workable,
     Destroyable,
     Consumable,
-    Inspectable
-    // Add more tags as needed
-    // Example:
-    // Collectible,
+    Inspectable,
+    Pellet,
 }

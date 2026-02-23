@@ -38,12 +38,12 @@ public class playerController : MonoBehaviour
     public playersInfo pInfo;
     public int playerID = 0;
     public int playerIDOffset = 0;
-    
+
     public bool isCarryingObject = false;
-    public Transform carryPosition; 
+    public Transform carryPosition;
     public GameObject objectToGrab;
-    
-    public List <GameObject> listobjectsToGrab = new List<GameObject>();
+
+    public List<GameObject> listobjectsToGrab = new List<GameObject>();
     public int maxObjectsToCarry = 2;
     public bool isAbsorbingResources = false;
 
@@ -103,7 +103,6 @@ public class playerController : MonoBehaviour
     public GameObject b_button;
     public GameObject a_button;
 
-
     private void OnEnable()
     {
         // Subscribe to the event
@@ -150,7 +149,7 @@ public class playerController : MonoBehaviour
         }
 
         spriteID = playerID + playerIDOffset;
-        
+
         // Only set sprite if playerSprite is valid
         if (playerSprite != null)
         {
@@ -162,9 +161,9 @@ public class playerController : MonoBehaviour
                     spriteID = 0;
                 }
             }
-            
+
             Sprite spriteToUse = GetSpriteByID(spriteID);
-            
+
             if (spriteToUse != null)
             {
                 playerSprite.sprite = spriteToUse;
@@ -219,8 +218,8 @@ public class playerController : MonoBehaviour
     //-MULTI OBJECT GRAB ->          NOT WORKING
     void Update()
     {
-        if(performingLabor)  PerformLabor();
-        if(isAbsorbingResources) AbsorbResources();
+        if (performingLabor) PerformLabor();
+        if (isAbsorbingResources) AbsorbResources();
 
         if (!isCarryingObject && !performingLabor && !isAbsorbingResources)
         {
@@ -448,11 +447,11 @@ public class playerController : MonoBehaviour
                 return characterSprites[id];
             }
         }
-        
+
         // Fallback to individual sprite fields
         Sprite[] fallbackSprites = { sprite1, sprite2, sprite3, sprite4 };
         int fallbackIndex = id % 4;
-        
+
         // Find the first available sprite
         for (int i = 0; i < 4; i++)
         {
@@ -462,7 +461,7 @@ public class playerController : MonoBehaviour
                 return fallbackSprites[index];
             }
         }
-        
+
         return null;
     }
 
@@ -470,7 +469,7 @@ public class playerController : MonoBehaviour
     private void HandleGameStateChanged(GameState newState)
     {
         if (debug) Debug.Log("State Change Called");
-        if (playerInputComponent ==  null) playerInputComponent = GetComponent<PlayerInput>();
+        if (playerInputComponent == null) playerInputComponent = GetComponent<PlayerInput>();
 
         switch (newState)
         {
@@ -514,7 +513,7 @@ public class playerController : MonoBehaviour
     }
     */
 
-        private void OnDisable()
+    private void OnDisable()
     {
         // Always unsubscribe to prevent memory leaks
         if (GameManager.Instance != null)
@@ -529,7 +528,8 @@ public class playerController : MonoBehaviour
         if (horizontalInput > 0 && !facingRight)
         {
             Flip();
-        } else if (horizontalInput < 0 && facingRight)
+        }
+        else if (horizontalInput < 0 && facingRight)
         {
             Flip();
         }
@@ -551,7 +551,8 @@ public class playerController : MonoBehaviour
             Vector3 screenPosition = Camera.main.WorldToScreenPoint(grabPoint) + offSet2D;
             b_button.transform.position = screenPosition;
             b_button.SetActive(true);
-        } else
+        }
+        else
         {
             b_button.SetActive(false);
         }
@@ -581,7 +582,7 @@ public class playerController : MonoBehaviour
             StartCoroutine(ScaleOverTime(grabGraphic, new Vector3(startScale, startScale, startScale), new Vector3(endScale, endScale, endScale), duration));
 
             //Play sound
-            if(inspectSound != null) inspectSound.Play();
+            if (inspectSound != null) inspectSound.Play();
         }
     }
     public void onMove(InputAction.CallbackContext context)
@@ -591,6 +592,13 @@ public class playerController : MonoBehaviour
         calculateGrabPoint(movementInput);
 
         FlipCharacter(movementInput.x);
+
+        if (movementInput != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(movementInput.y, movementInput.x) * Mathf.Rad2Deg;
+            angle -= 90f;
+            this.transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
     }
     public void onFire(InputAction.CallbackContext context)
     {
@@ -616,10 +624,12 @@ public class playerController : MonoBehaviour
         {
             if (debug) Debug.Log("Button X Pressed Down");
             StartLabor();
-        } else if (context.performed)
+        }
+        else if (context.performed)
         {
             if (debug) Debug.Log("Button X Held");
-        } else if (context.canceled)
+        }
+        else if (context.canceled)
         {
             if (debug) Debug.Log("Button X Released");
             cancelLabor();
@@ -631,10 +641,12 @@ public class playerController : MonoBehaviour
         {
             if (debug) Debug.Log("Button Y Pressed Down");
             StartAbsorb();
-        } else if (context.performed)
+        }
+        else if (context.performed)
         {
             if (debug) Debug.Log("Button Y Held");
-        } else if (context.canceled)
+        }
+        else if (context.canceled)
         {
             if (debug) Debug.Log("Button Y Released");
             StopAbsorb();
@@ -648,28 +660,28 @@ public class playerController : MonoBehaviour
         if (context.started)
         {
             Debug.Log("Button RB Pressed Down");
-            
+
             if (playerSprite == null) return;
-            
+
             spriteID--;
-            
+
             // Handle wrapping based on available sprites
-            int maxSprites = (characterSprites != null && characterSprites.Count > 0) 
-                ? characterSprites.Count 
+            int maxSprites = (characterSprites != null && characterSprites.Count > 0)
+                ? characterSprites.Count
                 : 4; // Fallback to 4 for individual sprite fields
-            
+
             if (spriteID < 0)
             {
                 spriteID = maxSprites - 1;
             }
-            
+
             Sprite spriteToUse = GetSpriteByID(spriteID);
             if (spriteToUse != null)
             {
                 playerSprite.sprite = spriteToUse;
             }
         }
-
+        Debug.Log("I AM THE FIRE 5 BUTTON");
     }
 
     public void onFire6(InputAction.CallbackContext context)
@@ -677,21 +689,21 @@ public class playerController : MonoBehaviour
         if (context.started)
         {
             Debug.Log("Button LB Pressed Down");
-            
+
             if (playerSprite == null) return;
-            
+
             spriteID++;
-            
+
             // Handle wrapping based on available sprites
-            int maxSprites = (characterSprites != null && characterSprites.Count > 0) 
-                ? characterSprites.Count 
+            int maxSprites = (characterSprites != null && characterSprites.Count > 0)
+                ? characterSprites.Count
                 : 4; // Fallback to 4 for individual sprite fields
-            
+
             if (spriteID >= maxSprites)
             {
                 spriteID = 0;
             }
-            
+
             Sprite spriteToUse = GetSpriteByID(spriteID);
             if (spriteToUse != null)
             {
@@ -712,10 +724,12 @@ public class playerController : MonoBehaviour
                 playerInputComponent.SwitchCurrentActionMap("UI");
             }
 
-        } else if (context.performed)
+        }
+        else if (context.performed)
         {
             if (debug) Debug.Log("Button Start Held");
-        } else if (context.canceled)
+        }
+        else if (context.canceled)
         {
             if (debug) Debug.Log("Button Start Released");
             //StopAbsorb();
@@ -725,23 +739,24 @@ public class playerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        
+
     }
     private void FixedUpdate()
     {
         if (dustParticles != null)
         {
-            if(movementInput.x != 0 || movementInput.y != 0) createDust();
+            if (movementInput.x != 0 || movementInput.y != 0) createDust();
         }
         rb.linearVelocity = new Vector2(movementInput.x * playerSpeed, movementInput.y * playerSpeed);
     }
     public void CreateObjects()
-    {   
-        if(cManager != null){
+    {
+        if (cManager != null)
+        {
             if (debug) Debug.Log("Create Attempt by: " + transform.gameObject);
             cManager.CreateSpriteAtPlayerPosition(transform.gameObject);
         }
-        
+
     }
     public void StartAbsorb()
     {
@@ -758,9 +773,9 @@ public class playerController : MonoBehaviour
             Station stationComp = objectToLabor.GetComponent<Station>();
             if (stationComp != null)
             {
-                if(stationComp.inputArea != null && stationComp.consumeResource)
+                if (stationComp.inputArea != null && stationComp.consumeResource)
                 {
-                    if( stationComp.inputArea.AreAllRequirementsMet() != true)
+                    if (stationComp.inputArea.AreAllRequirementsMet() != true)
                     {
                         stationComp.inputArea.playErrorSequence();
                         return;
@@ -772,12 +787,12 @@ public class playerController : MonoBehaviour
         performingLabor = true;
     }
     public void PerformLabor()
-    {   
+    {
         if (objectToLabor != null)
         {
             Station stationComp = objectToLabor.GetComponent<Station>();
             if (stationComp != null)
-            {   
+            {
                 stationComp.worker = this; //assign worker to station
                 stationComp.executeLabor(this);
             }
@@ -811,8 +826,8 @@ public class playerController : MonoBehaviour
         Debug.Log("Absorbing Resources");
     }
     private void GrabObject()
-    {   
-        if(objectToGrab != null)
+    {
+        if (objectToGrab != null)
         {
             isCarryingObject = true;
 
@@ -831,7 +846,7 @@ public class playerController : MonoBehaviour
 
             // Parent the object to the carry position
             objectToGrab.transform.SetParent(grabArea.transform);
-            
+
 
             if (objectToGrab != null)
             {
@@ -841,7 +856,7 @@ public class playerController : MonoBehaviour
                 //objectToGrab.transform.localRotation = Quaternion.identity;
             }
         }
-        
+
     }
     private void DropObject()
     {
@@ -931,15 +946,16 @@ public class playerController : MonoBehaviour
         }
     }
     public GameObject GetObjectToGrab()
-    {   
+    {
         if (isCarryingObject)
         {
             return objectToGrab;
-        } else
+        }
+        else
         {
             return null;
         }
-        
+
     }
     public void DropAndDestroy()
     {
@@ -949,7 +965,7 @@ public class playerController : MonoBehaviour
             objectToGrab.transform.SetParent(null);
             Destroy(objectToGrab);
         }
-        
+
     }
     IEnumerator ScaleOverTime(GameObject obj, Vector3 startScale, Vector3 endScale, float duration)
     {
@@ -974,9 +990,10 @@ public class playerController : MonoBehaviour
         obj.transform.localScale = endScale;
         coroutineRunning = false;
     }
-    
+
     public void pauseGame()
     {
-        if(gameManager != null) gameManager.SetState(GameState.Paused);
+        if (gameManager != null) gameManager.SetState(GameState.Paused);
     }
+
 }
