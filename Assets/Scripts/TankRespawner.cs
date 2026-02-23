@@ -10,8 +10,8 @@ public class TankRespawner : MonoBehaviour
     private bool isInvulnerable = false;
 
     // References
-    private SpriteRenderer sr;
-    private Collider2D body;
+    private SpriteRenderer spriteRenderer;
+    private Collider2D bodyCollider;
 
     void Awake()
     {
@@ -19,10 +19,10 @@ public class TankRespawner : MonoBehaviour
 
         foreach (var col in colliders)
         {
-            if (!col.isTrigger) this.body = col;
+            if (!col.isTrigger) this.bodyCollider = col;
         }
 
-        this.sr = GetComponentInChildren<SpriteRenderer>();
+        this.spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Start()
@@ -43,8 +43,8 @@ public class TankRespawner : MonoBehaviour
 
     IEnumerator RespawnRoutine()
     {
-        this.sr.enabled = false;
-        this.body.enabled = false;
+        this.spriteRenderer.enabled = false;
+        this.bodyCollider.enabled = false;
         yield return new WaitForSeconds(this.respawnDelay);
 
         // Start invulnerability
@@ -52,8 +52,8 @@ public class TankRespawner : MonoBehaviour
 
         // Respawn
         this.transform.position = this.spawnPosition;
-        this.sr.enabled = true;
-        this.body.enabled = true;
+        this.spriteRenderer.enabled = true;
+        this.bodyCollider.enabled = true;
 
         yield return new WaitForSeconds(this.invulnerabilityTime);
         this.isInvulnerable = false;
