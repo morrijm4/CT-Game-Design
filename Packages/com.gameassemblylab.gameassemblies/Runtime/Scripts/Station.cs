@@ -10,6 +10,7 @@ public class Station : ResourceNode
     [Header("Station Data (SO)")]
     [Tooltip("ScriptableObject containing this station's configuration. All behavior data is read from here.")]
     public StationDataSO stationData;
+    public int bombInc = 0;
 
     [Header("Managers")]
     public StationManager sManager;
@@ -138,7 +139,7 @@ public class Station : ResourceNode
 
 
     // Start is called before the first frame update
-    protected void Start()   
+    protected void Start()
     {
         workerCount = new List<playerController>();
 
@@ -203,7 +204,7 @@ public class Station : ResourceNode
             playWorkingSound();
             if (flaggedToUpgrade > -1) flaggedToUpgrade--;
             if (flaggedToUpgrade == 0) upgradeStation();
-           
+
         }
     }
 
@@ -220,12 +221,15 @@ public class Station : ResourceNode
             outputAudio.Play();
             prevWork = isBeingWorkedOn;
             //Debug.Log("PLAY");
-        } else if (prevWork != isBeingWorkedOn && isBeingWorkedOn == false) 
+        }
+        else if (prevWork != isBeingWorkedOn && isBeingWorkedOn == false)
         {
             outputAudio.Stop();
             prevWork = isBeingWorkedOn;
             //Debug.Log("STOP");
-        } else {
+        }
+        else
+        {
             //Debug.Log("NOTHING");
         }
     }
@@ -234,35 +238,38 @@ public class Station : ResourceNode
     {
         decayTimer += Time.deltaTime; //decay timer
         if (decayTimer >= decayCycle) //decay cycle
-        {   
+        {
             //if resources are there, they are consumed, if they are not, the unit decays
-            if (inputArea.AreAllRequirementsMet()) 
+            if (inputArea.AreAllRequirementsMet())
             {
                 ConsumeResource();
                 ConsumeCapital(worker);
                 //Debug.Log("TRUE!");
-            } else{
+            }
+            else
+            {
                 if (decayValue < maxDecay)
                 {
                     decayValue++;
-                } else
+                }
+                else
                 {
                     isAlive = false;
                     swapSprite();
                 }
-                
+
                 //Debug.Log("FALSE!");
             }
             decayTimer = 0f;
         }
-        
+
     }
     public void growOlder()
     {
         if (canGrow)
         {
             ageTimer += Time.deltaTime;
-            if(ageTimer >= growthRate)
+            if (ageTimer >= growthRate)
             {
                 age++;
                 ageTimer = 0f;
@@ -303,6 +310,7 @@ public class Station : ResourceNode
         if (capitalOutput)
         {
             if (pC != null) pC.capital += capitalOutputAmount;
+            if (pC != null && pC.bombs < pC.maxBombs) pC.bombs += this.bombInc;
             if (rManager != null) rManager.globalCapital += capitalOutputAmount;
         }
     }
@@ -326,25 +334,26 @@ public class Station : ResourceNode
     }
     public void InitializeInforPanel()
     {
-        if(infoWindow != null)
+        if (infoWindow != null)
         {
             infoWindow.GetComponent<InfoWindow>().InitializeResources(produces, consumes);
         }
-        
+
     }
     public void updateInfoPanel()
     {
         if (isBeingInspected)
-        {   
-            if(infoWindow != null)
+        {
+            if (infoWindow != null)
             {
                 infoWindow.SetActive(true);
                 Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * offsetY);
                 infoWindow.transform.position = screenPosition;
                 infoPanelAnimation();
             }
-            
-        } else
+
+        }
+        else
         {
             if (infoWindow != null) infoWindow.SetActive(false); // could be optimized
         }
@@ -384,7 +393,8 @@ public class Station : ResourceNode
             }
             float sliderValue = workProgress / workDuration;
             progressSlider.value = sliderValue;
-        } else
+        }
+        else
         {
             sliderBar.SetActive(false); // could be optimized
             progressSlider.value = 0;
@@ -392,27 +402,27 @@ public class Station : ResourceNode
     }
     public void executeLabor(playerController newWorker)
     {
-        if(!workerCount.Contains(newWorker) ) { workerCount.Add(newWorker); } //only add the worker to the list if new entity
+        if (!workerCount.Contains(newWorker)) { workerCount.Add(newWorker); } //only add the worker to the list if new entity
 
         isBeingWorkedOn = true;
         //workProgress += Time.deltaTime; //ONE PLAYER CAN WORK
         workProgress += Time.deltaTime * workerCount.Count;
         //if (debug) Debug.Log("Work Pogress: " + workProgress + "/" + workDuration);
         if (workProgress >= workDuration)
-            {
-                CompleteWork();
-            }
+        {
+            CompleteWork();
+        }
     }
     public void cancelLabor(playerController newWorker)
     {
         if (workerCount.Contains(newWorker)) { workerCount.Remove(newWorker); }
 
-        if(workerCount.Count == 0)
+        if (workerCount.Count == 0)
         {
             isBeingWorkedOn = false;
             workProgress = 0;
         }
-        
+
     }
     private void CompleteWork()
     {
@@ -430,7 +440,7 @@ public class Station : ResourceNode
     }
     void upgradeStation()
     {
-        if(upgradePrefab != null)
+        if (upgradePrefab != null)
         {
             GameObject newStation = Instantiate(upgradePrefab, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
@@ -447,7 +457,7 @@ public class Station : ResourceNode
     }
     void ConsumeOnWork()
     {
-        if(debug) Debug.Log("Consume on Work Called, workCompleted: " + workCompleted);
+        if (debug) Debug.Log("Consume on Work Called, workCompleted: " + workCompleted);
         if (workCompleted)
         {
             if (debug) Debug.Log("Consume on Work Called Completed Sequence");
@@ -489,9 +499,9 @@ public class Station : ResourceNode
 
         //if (productionTimer >= productionInterval)
         //{
-            ConsumeResource();
-            ConsumeCapital(owner);
-            //productionTimer = 0f;
+        ConsumeResource();
+        ConsumeCapital(owner);
+        //productionTimer = 0f;
         //}
     }
     void AutomaticProduction()
@@ -510,7 +520,7 @@ public class Station : ResourceNode
 
     public void playProductionSound()
     {
-        if(outputAudio == null || completeSound == null) return;
+        if (outputAudio == null || completeSound == null) return;
         outputAudio.clip = completeSound;
         outputAudio.Play();
     }
@@ -529,7 +539,7 @@ public class Station : ResourceNode
                 if (debug) Debug.Log($"{gameObject.name}: Produced {1} of {produces[i].resourceName}");
 
                 if (spawnResourcePrefab)
-                {  
+                {
                     InstantiateResourcePrefabs(produces[i]);// Instantiate the resource prefab
                 }
 
@@ -539,24 +549,26 @@ public class Station : ResourceNode
 
                 //AUDIO:
                 playProductionSound();
-                
+
             }
 
             if (isSingleUse)
             {
                 isAlive = false;
                 swapSprite();
-                
+
             }
-        } else if (WhatToProduce == productionMode.Station)
+        }
+        else if (WhatToProduce == productionMode.Station)
         {
             for (int i = 0; i < produces_stations.Count; i++)
             {
                 InstantiateStationPrefabs(i);
             }
-        }else if (WhatToProduce == productionMode.LootTable)
+        }
+        else if (WhatToProduce == productionMode.LootTable)
         {
-            if(produceLootTable != null)
+            if (produceLootTable != null)
             {
                 var (output, qty) = produceLootTable.GetRandomDrop();
                 if (output != null)
@@ -577,7 +589,8 @@ public class Station : ResourceNode
                         swapSprite();
                     }
                 }
-            } else
+            }
+            else
             {
                 Debug.LogError("No Loot Table available");
             }
@@ -603,7 +616,8 @@ public class Station : ResourceNode
 
                 if (productionParticles != null) Instantiate(productionParticles, spawnPosition, Quaternion.identity);
 
-            } else
+            }
+            else
             {
                 // Generate a random point inside a circle
                 Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * spawnRadius;
@@ -625,7 +639,8 @@ public class Station : ResourceNode
                 }
 
             }
-        } else
+        }
+        else
         {
             //Debug.LogWarning($"{gameObject.name}: Resource prefab is not assigned for {resourceToProduce.resourceName}");
         }

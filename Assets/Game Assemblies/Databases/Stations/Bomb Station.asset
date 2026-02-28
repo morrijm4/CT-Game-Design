@@ -10,41 +10,39 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c3dcfb3376eb4d02834bd63a7b90587, type: 3}
-  m_Name: Pellet Station
+  m_Name: Bomb Station
   m_EditorClassIdentifier: GameAssemblyLab.GameAssemblies::StationDataSO
-  stationName: Pellet Station
+  stationName: Bomb Station
   stationGraphic: {fileID: 0}
   stationSpriteTint: {r: 1, g: 1, b: 1, a: 1}
   stationScale: 0.5
   deadSprite: {fileID: 0}
   deadSpriteTint: {r: 1, g: 1, b: 1, a: 1}
-  stationPrefab: {fileID: 9016815169782331615, guid: d3c12a494302346f4a7bb5ad03545a6a, type: 3}
+  stationPrefab: {fileID: 370587298374475138, guid: 3032c0f361f88451cbbf66ac5b0e4807, type: 3}
   offsetY: 0.5
   uiScale: 0.5
   manualSliderPosition: 0
   sliderOffsetY: -0.46
   consumeResource: 0
-  produceResource: 1
-  consumes:
-  - {fileID: 11400000, guid: d64761c497f0d4e3bac93b68687e50ed, type: 2}
-  produces:
-  - {fileID: 11400000, guid: d64761c497f0d4e3bac93b68687e50ed, type: 2}
+  produceResource: 0
+  consumes: []
+  produces: []
   whatToProduce: 0
   produceLootTable: {fileID: 0}
   spawnResourcePrefab: 1
   useInputArea: 0
-  useOutputArea: 1
+  useOutputArea: 0
   spawnRadius: 1
   isSingleUse: 0
   destroyAfterSingleUse: 0
-  capitalInput: 0
-  capitalOutput: 1
-  capitalInputAmount: 0
-  capitalOutputAmount: 1
+  capitalInput: 1
+  capitalOutput: 0
+  capitalInputAmount: 4
+  capitalOutputAmount: 0
   completesGoals_consumption: 0
   completesGoals_production: 0
   canBeWorked: 1
-  workDuration: 0.5
+  workDuration: 1
   productionInterval: 5
   typeOfProduction: 2
   typeOfConsumption: 2

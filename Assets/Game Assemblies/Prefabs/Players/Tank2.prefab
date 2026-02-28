@@ -347,7 +347,7 @@ MonoBehaviour:
   characterSprites: []
   playerSprite: {fileID: 8930264680089808671}
   spriteID: 0
-  playerSpeed: 2
+  playerSpeed: 1.5
   rb: {fileID: 2837374567193793473}
   pInfo: {fileID: 0}
   playerID: 0
@@ -446,6 +446,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7288353577272366416}
+        m_TargetAssemblyTypeName: TankShooter, Assembly-CSharp
+        m_MethodName: ShootBomb
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onPlayerButton_Start:
     m_PersistentCalls:
       m_Calls:
@@ -476,6 +488,8 @@ MonoBehaviour:
   y_button: {fileID: 0}
   b_button: {fileID: 0}
   a_button: {fileID: 0}
+  maxBombs: 1
+  bombs: 0
 --- !u!50 &2837374567193793473
 Rigidbody2D:
   serializedVersion: 5
@@ -529,7 +543,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankShooter
   pellet: {fileID: 474010882118868080, guid: a3aab3b7370134335aba1c40f928914c, type: 3}
+  bomb: {fileID: 7729062142416397491, guid: 132f4ba610658479cb5acb9445081b30, type: 3}
   muzzle: {fileID: 2369809150426497948}
+  maxPellets: 10
 --- !u!114 &5319847534122579517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -904,7 +920,7 @@ Transform:
   m_GameObject: {fileID: 7405483986899148852}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.001, y: 0.519, z: 0}
+  m_LocalPosition: {x: 0.001, y: 0.653, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

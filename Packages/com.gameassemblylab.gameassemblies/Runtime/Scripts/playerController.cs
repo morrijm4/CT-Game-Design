@@ -103,6 +103,10 @@ public class playerController : MonoBehaviour
     public GameObject b_button;
     public GameObject a_button;
 
+    [Header("Bombs")]
+    public int maxBombs = 1;
+    public int bombs = 0;
+
     private void OnEnable()
     {
         // Subscribe to the event
