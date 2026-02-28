@@ -321,7 +321,7 @@ MonoBehaviour:
     m_ActionId: a3e574b9-2d9a-44de-8c1c-526dade39c9f
     m_ActionName: 'Player/Fire 6[/XInputControllerWindows/rightShoulder]'
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Joystick
+  m_DefaultControlScheme: 
   m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -340,10 +340,10 @@ MonoBehaviour:
   cManager: {fileID: 0}
   gameManager: {fileID: 0}
   playerInputComponent: {fileID: 0}
-  sprite1: {fileID: 0}
-  sprite2: {fileID: 0}
-  sprite3: {fileID: 0}
-  sprite4: {fileID: 0}
+  sprite1: {fileID: 21300000, guid: 5e912b706e68d419e990a7ac2383a460, type: 3}
+  sprite2: {fileID: 21300000, guid: cfa199f7e8cd54ffdb2d1fc4f8e3f8de, type: 3}
+  sprite3: {fileID: 820405171, guid: b9f690056955d4afeb016d855831050a, type: 3}
+  sprite4: {fileID: 820405171, guid: b9f690056955d4afeb016d855831050a, type: 3}
   characterSprites: []
   playerSprite: {fileID: 8930264680089808671}
   spriteID: 0
