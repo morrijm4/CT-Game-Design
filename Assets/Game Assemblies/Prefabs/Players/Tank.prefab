@@ -398,7 +398,7 @@ MonoBehaviour:
     m_ActionName: 'Player/Fire 6[/XInputControllerWindows/rightShoulder]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Keyboard
-  m_DefaultActionMap: UI
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &5031758489567587670
@@ -552,6 +552,8 @@ MonoBehaviour:
   y_button: {fileID: 0}
   b_button: {fileID: 0}
   a_button: {fileID: 0}
+  maxBombs: 1
+  bombs: 0
 --- !u!50 &2837374567193793473
 Rigidbody2D:
   serializedVersion: 5
@@ -651,7 +653,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankShooter
   pellet: {fileID: 474010882118868080, guid: a3aab3b7370134335aba1c40f928914c, type: 3}
+  bomb: {fileID: 0}
   muzzle: {fileID: 7966560599276608768}
+  maxPellets: 10
 --- !u!1 &4308293142968107062
 GameObject:
   m_ObjectHideFlags: 0
