@@ -106,10 +106,6 @@ public class playerController : MonoBehaviour
     public GameObject b_button;
     public GameObject a_button;
 
-    [Header("Bombs")]
-    public int maxBombs = 1;
-    public int bombs = 0;
-
     private void OnEnable()
     {
         // Subscribe to the event
@@ -621,6 +617,8 @@ public class playerController : MonoBehaviour
     {
         movementInput = context.ReadValue<Vector2>();
 
+        if (debug) Debug.Log("Move" + movementInput);
+
         calculateGrabPoint(movementInput);
 
         FlipCharacter(movementInput.x);
@@ -636,8 +634,8 @@ public class playerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            fired = context.action.triggered;
             if (debug) Debug.Log("Button A Pressed!");
+            fired = context.action.triggered;
             onPlayerButton_A.Invoke();
         }
     }
@@ -656,6 +654,7 @@ public class playerController : MonoBehaviour
         {
             if (debug) Debug.Log("Button X Pressed Down");
             StartLabor();
+            onPlayerButton_X.Invoke();
         }
         else if (context.performed)
         {
@@ -673,6 +672,7 @@ public class playerController : MonoBehaviour
         {
             if (debug) Debug.Log("Button Y Pressed Down");
             StartAbsorb();
+            onPlayerButton_Y.Invoke();
         }
         else if (context.performed)
         {
@@ -713,7 +713,6 @@ public class playerController : MonoBehaviour
                 playerSprite.sprite = spriteToUse;
             }
         }
-        Debug.Log("I AM THE FIRE 5 BUTTON");
     }
 
     public void onFire6(InputAction.CallbackContext context)
@@ -855,7 +854,7 @@ public class playerController : MonoBehaviour
     }
     public void AbsorbResources()
     {
-        Debug.Log("Absorbing Resources");
+        if (debug) Debug.Log("Absorbing Resources");
     }
     private void GrabObject()
     {

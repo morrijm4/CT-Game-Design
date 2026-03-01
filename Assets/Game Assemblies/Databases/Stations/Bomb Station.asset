@@ -23,7 +23,7 @@ MonoBehaviour:
   uiScale: 0.5
   manualSliderPosition: 0
   sliderOffsetY: -0.46
-  consumeResource: 0
+  consumeResource: 1
   produceResource: 0
   consumes: []
   produces: []
