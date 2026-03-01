@@ -150,10 +150,11 @@ GameObject:
   - component: {fileID: 5031758489567587670}
   - component: {fileID: 2837374567193793473}
   - component: {fileID: 855185347071884907}
-  - component: {fileID: 7288353577272366416}
   - component: {fileID: 5319847534122579517}
   - component: {fileID: 7412396093800095126}
   - component: {fileID: 6529118568134941698}
+  - component: {fileID: -5691699385362627107}
+  - component: {fileID: 8489113680148790352}
   m_Layer: 0
   m_Name: Tank2
   m_TagString: Player
@@ -352,6 +353,7 @@ MonoBehaviour:
   pInfo: {fileID: 0}
   playerID: 0
   playerIDOffset: 0
+  controlSchemeIndex: -1
   isCarryingObject: 0
   carryPosition: {fileID: 4593627664609122436}
   objectToGrab: {fileID: 0}
@@ -366,7 +368,7 @@ MonoBehaviour:
   useSnapTarget: 1
   snapRadius: 0.1
   snapAimBias: 0
-  capital: 0
+  capital: 9999999
   properties: []
   distanceFromPlayer: 0.4
   grabPoint: {x: 0, y: 0, z: 0}
@@ -377,21 +379,9 @@ MonoBehaviour:
   onPlayerButton_A:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5031758489567587670}
-        m_TargetAssemblyTypeName: playerController, Assembly-CSharp
-        m_MethodName: CreateObjects
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7288353577272366416}
-        m_TargetAssemblyTypeName: TankShooter, Assembly-CSharp
-        m_MethodName: ShootPellet
+      - m_Target: {fileID: -5691699385362627107}
+        m_TargetAssemblyTypeName: PelletShooter, Assembly-CSharp
+        m_MethodName: Shoot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -434,21 +424,9 @@ MonoBehaviour:
   onPlayerButton_Y:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5031758489567587670}
-        m_TargetAssemblyTypeName: playerController, Assembly-CSharp
-        m_MethodName: AbsorbResources
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7288353577272366416}
-        m_TargetAssemblyTypeName: TankShooter, Assembly-CSharp
-        m_MethodName: ShootBomb
+      - m_Target: {fileID: 8489113680148790352}
+        m_TargetAssemblyTypeName: BombShooter, Assembly-CSharp
+        m_MethodName: Shoot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -530,22 +508,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 02000000
---- !u!114 &7288353577272366416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3308519254579872422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80569f81e7cd24f44af3d3e8d567eb5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TankShooter
-  pellet: {fileID: 474010882118868080, guid: a3aab3b7370134335aba1c40f928914c, type: 3}
-  bomb: {fileID: 7729062142416397491, guid: 132f4ba610658479cb5acb9445081b30, type: 3}
-  muzzle: {fileID: 2369809150426497948}
-  maxPellets: 10
 --- !u!114 &5319847534122579517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -652,6 +614,40 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.43842906, y: 0.8141421}
   m_EdgeRadius: 0
+--- !u!114 &-5691699385362627107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3308519254579872422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80569f81e7cd24f44af3d3e8d567eb5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PelletShooter
+  projectile: {fileID: 1375569915086783828, guid: a3aab3b7370134335aba1c40f928914c, type: 3}
+  muzzle: {fileID: 2369809150426497948}
+  count: 0
+  maxProjectiles: 20
+  debug: 0
+--- !u!114 &8489113680148790352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3308519254579872422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560859aa788684eb2b0a247bf2be7367, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BombShooter
+  projectile: {fileID: 8400179861900509974, guid: 132f4ba610658479cb5acb9445081b30, type: 3}
+  muzzle: {fileID: 2369809150426497948}
+  count: 0
+  maxProjectiles: 2
+  debug: 0
 --- !u!1 &4308293142968107062
 GameObject:
   m_ObjectHideFlags: 0

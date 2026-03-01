@@ -1,0 +1,1 @@
+class BombShooter : Shooter { }
