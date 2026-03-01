@@ -2558,6 +2558,7 @@ GameObject:
   - component: {fileID: 3359490812527943467}
   - component: {fileID: 1145484164060271835}
   - component: {fileID: 7068041827410731574}
+  - component: {fileID: 4361529732904415518}
   m_Layer: 7
   m_Name: Pellet Station
   m_TagString: Grabbable
@@ -2757,6 +2758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationData: {fileID: 11400000, guid: 659acda9e19614b24b949379e8448e2a, type: 2}
+  bombInc: 0
   sManager: {fileID: 0}
   rManager: {fileID: 0}
   gManager: {fileID: 0}
@@ -2798,6 +2800,24 @@ MonoBehaviour:
   completeSound: {fileID: 0}
   notEnoughMaterialsSound: {fileID: 0}
   productionParticles: {fileID: 0}
+  onConsumption:
+    m_PersistentCalls:
+      m_Calls: []
+  onProduction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4361529732904415518}
+        m_TargetAssemblyTypeName: ProjectileSupplier, Assembly-CSharp
+        m_MethodName: AddPellet
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   doUpdate: 0
   debug: 0
 --- !u!114 &7068041827410731574
@@ -2813,3 +2833,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 0300000006000000
+--- !u!114 &4361529732904415518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9016815169782331615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf2a83d2099b34ec080dd44e6b82d3f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileSupplier

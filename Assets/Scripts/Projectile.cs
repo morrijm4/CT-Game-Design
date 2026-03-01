@@ -1,8 +1,9 @@
 using UnityEngine;
 
-public class Pellet : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
     public float speed = 0.5f;
+    public bool debug = false;
     private Rigidbody2D rb;
 
     void Awake()
@@ -17,7 +18,8 @@ public class Pellet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Hit: " + other.CompareTag("Player"));
+        if (other.CompareTag("ConsumeArea")) return;
         Destroy(gameObject);
+        if (debug) Debug.Log("Bullet Destroyed");
     }
 }
