@@ -10,7 +10,7 @@ public class MainMenuManager : MonoBehaviour
     public Image progressBarFill;
 
     [Header("Loading Settings")]
-    public float minimumLoadTime = 3f; // How many seconds the bar takes to fill
+    public float minimumLoadTime = 0.2f; // How many seconds the bar takes to fill
 
     public void OnPlayClicked()
     {
@@ -22,9 +22,9 @@ public class MainMenuManager : MonoBehaviour
         Debug.Log("Quit clicked");
         Application.Quit();
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-        #endif
+#endif
     }
 
     IEnumerator LoadGameScene()
@@ -71,9 +71,6 @@ public class MainMenuManager : MonoBehaviour
 
             yield return null;
         }
-
-        // Small pause at full bar before switching scenes
-        yield return new WaitForSeconds(0.5f);
 
         operation.allowSceneActivation = true;
     }
