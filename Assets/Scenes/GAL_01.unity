@@ -2362,6 +2362,10 @@ PrefabInstance:
       propertyPath: debug
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7671436922312679930, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: m_TagString
+      value: ConsumeArea
+      objectReference: {fileID: 0}
     - target: {fileID: 8930264680089808671, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
       propertyPath: m_Sprite
       value: 
