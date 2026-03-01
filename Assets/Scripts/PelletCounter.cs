@@ -16,7 +16,7 @@ public class PelletCounter : MonoBehaviour
     void Start()
     {
 
-        pelletCounter.text = "x 0";
+        pelletCounter.text = "x   0";
     }
 
     // Update is called once per frame
@@ -24,6 +24,6 @@ public class PelletCounter : MonoBehaviour
     {
         int count = playerController.capital;
         Debug.Log("PelletCounter: Updating pellet count to " + count);
-        pelletCounter.text = "x" + count.ToString();
+        pelletCounter.text = "x   " + count.ToString();
     }
 }
