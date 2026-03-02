@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 2863868007908438503}
   - component: {fileID: 1573946679327935976}
   - component: {fileID: 4563342692357963204}
+  - component: {fileID: 8382294539394371416}
   m_Layer: 7
   m_Name: Bomb Station
   m_TagString: Grabbable
@@ -332,6 +333,24 @@ MonoBehaviour:
   completeSound: {fileID: 0}
   notEnoughMaterialsSound: {fileID: 0}
   productionParticles: {fileID: 0}
+  onConsumption:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8382294539394371416}
+        m_TargetAssemblyTypeName: ProjectileSupplier, Assembly-CSharp
+        m_MethodName: AddBomb
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onProduction:
+    m_PersistentCalls:
+      m_Calls: []
   doUpdate: 0
   debug: 0
 --- !u!114 &4563342692357963204
@@ -347,6 +366,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 0300000006000000
+--- !u!114 &8382294539394371416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370587298374475138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf2a83d2099b34ec080dd44e6b82d3f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileSupplier
+  bombCost: 4
 --- !u!1 &733177373922692927
 GameObject:
   m_ObjectHideFlags: 0
