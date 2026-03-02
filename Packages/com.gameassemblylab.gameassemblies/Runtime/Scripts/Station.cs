@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 //using UnityEngine.2D;
 using System.Collections;
+using UnityEngine.Events;
 //using System;
 
 public class Station : ResourceNode
@@ -127,6 +128,10 @@ public class Station : ResourceNode
     [Header("Particles")]
     public GameObject productionParticles;
 
+    [Header("Event Listeners")]
+    public UnityEvent<playerController> onConsumption;
+    public UnityEvent<playerController> onProduction;
+
 
     [Header("Debug Tools")]
     public bool doUpdate = false;
@@ -189,7 +194,6 @@ public class Station : ResourceNode
                 if (typeOfProduction == interactionType.automatic) AutomaticProduction(); //and capital for owner
                 if (typeOfProduction == interactionType.whenWorked) ProduceOnWork();//and capital for worker
                 if (typeOfProduction == interactionType.whenResourcesConsumed) ConsumedProduction(); //and capital for worker
-
             }
             if (consumeResource)
             {
@@ -244,6 +248,7 @@ public class Station : ResourceNode
             {
                 ConsumeResource();
                 ConsumeCapital(worker);
+                onConsumption?.Invoke(worker);
                 //Debug.Log("TRUE!");
             }
             else
@@ -310,7 +315,6 @@ public class Station : ResourceNode
         if (capitalOutput)
         {
             if (pC != null) pC.capital += capitalOutputAmount;
-            if (pC != null && pC.bombs < pC.maxBombs) pC.bombs += this.bombInc;
             if (rManager != null) rManager.globalCapital += capitalOutputAmount;
         }
     }
@@ -452,6 +456,7 @@ public class Station : ResourceNode
         {
             ProduceResource();
             ProduceCapital(worker);
+            onProduction?.Invoke(worker);
             //workCompleted = false;
         }
     }
@@ -463,6 +468,7 @@ public class Station : ResourceNode
             if (debug) Debug.Log("Consume on Work Called Completed Sequence");
             ConsumeResource();
             ConsumeCapital(worker);
+            onConsumption?.Invoke(worker);
             //workCompleted = false;
         }
     }
@@ -489,6 +495,7 @@ public class Station : ResourceNode
         {
             ProduceResource();
             ProduceCapital(worker);
+            onProduction?.Invoke(worker);
             resourcesConsumed = false;
         }
     }
@@ -501,6 +508,7 @@ public class Station : ResourceNode
         //{
         ConsumeResource();
         ConsumeCapital(owner);
+        onConsumption?.Invoke(worker);
         //productionTimer = 0f;
         //}
     }
@@ -513,6 +521,7 @@ public class Station : ResourceNode
         {
             ProduceResource();
             ProduceCapital(owner);
+            onProduction?.Invoke(worker);
 
             productionTimer = 0f;
         }
