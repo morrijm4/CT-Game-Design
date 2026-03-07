@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31fe03b2af18f4e48bea92d4a5d37df2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Move
-  speed: {x: 0, y: 0, z: 0.02}
+  direction: {x: 0, y: 0, z: 0}
   rotate: {x: 0, y: 0.5, z: 0}
 --- !u!1 &304876751
 GameObject:
