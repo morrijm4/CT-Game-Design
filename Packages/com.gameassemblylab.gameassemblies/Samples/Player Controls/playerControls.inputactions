@@ -380,7 +380,7 @@
                 {
                     "name": "",
                     "id": "b6f7a8b9-c0d1-9f0a-3b4c-5d6e7f8a9b0c",
-                    "path": "<Keyboard>/numpadEnter",
+                    "path": "<Keyboard>/m",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardArrows",
@@ -391,7 +391,7 @@
                 {
                     "name": "",
                     "id": "c7a8b9c0-d1e2-0a1b-4c5d-6e7f8a9b0c1d",
-                    "path": "<Keyboard>/numpad0",
+                    "path": "<Keyboard>/comma",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardArrows",
@@ -402,7 +402,7 @@
                 {
                     "name": "",
                     "id": "d8b9c0d1-e2f3-1b2c-5d6e-7f8a9b0c1d2e",
-                    "path": "<Keyboard>/numpadPeriod",
+                    "path": "<Keyboard>/period",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardArrows",
@@ -413,7 +413,7 @@
                 {
                     "name": "",
                     "id": "e9c0d1e2-f3a4-2c3d-6e7f-8a9b0c1d2e3f",
-                    "path": "<Keyboard>/numpad1",
+                    "path": "<Keyboard>/slash",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardArrows",
