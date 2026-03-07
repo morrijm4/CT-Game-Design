@@ -22,7 +22,7 @@ public class PauseMenu : MonoBehaviour
     }
     
     public void home()
-        {
+    {
         SceneManager.LoadScene("MainMenu");
     }
 
