@@ -8,6 +8,7 @@ public class Shooter : MonoBehaviour
     public int count = 0;
     public int maxProjectiles = 0;
     public Text display;
+    public AudioClip shootSound;
 
     public bool debug = false;
 
@@ -17,6 +18,7 @@ public class Shooter : MonoBehaviour
         Vector3 offset = transform.rotation * Vector3.forward * projectile.radius;
         Instantiate(projectile, muzzle.position + offset, transform.rotation);
         Decrement();
+        if (shootSound) AudioSource.PlayClipAtPoint(shootSound, transform.position);
         if (debug) Debug.Log("Projectile shot. " + count + " left.");
     }
 
