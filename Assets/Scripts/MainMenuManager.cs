@@ -33,7 +33,7 @@ public class MainMenuManager : MonoBehaviour
         loadingScreen.SetActive(true);
 
         // Start loading the game scene in the background
-        AsyncOperation operation = SceneManager.LoadSceneAsync("GAL_01");
+        AsyncOperation operation = SceneManager.LoadSceneAsync("Arena");
         operation.allowSceneActivation = false;
 
         float elapsedTime = 0f;
