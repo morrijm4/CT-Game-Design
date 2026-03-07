@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shooter : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class Shooter : MonoBehaviour
     public Transform muzzle;
     public int count = 0;
     public int maxProjectiles = 0;
+    public Text display;
 
     public bool debug = false;
 
@@ -14,13 +16,18 @@ public class Shooter : MonoBehaviour
         if (count <= 0) return;
         Vector3 offset = transform.rotation * Vector3.forward * projectile.radius;
         Instantiate(projectile, muzzle.position + offset, transform.rotation);
-        count -= 1;
+        Decrement();
         if (debug) Debug.Log("Projectile shot. " + count + " left.");
     }
 
     public int Increment()
     {
         return SetCount(GetCount() + 1);
+    }
+
+    public int Decrement()
+    {
+        return SetCount(GetCount() - 1);
     }
 
     public int GetCount()
@@ -37,12 +44,20 @@ public class Shooter : MonoBehaviour
         else
             count = newCount;
 
+        UpdateDisplay();
+
         return count;
     }
 
     bool MaxProjectilesEnabled()
     {
         return maxProjectiles != 0;
+    }
+
+    void UpdateDisplay()
+    {
+        if (!display) return;
+        display.text = "x " + GetCount().ToString();
     }
 
     void OnValidate()
