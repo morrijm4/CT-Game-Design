@@ -368,7 +368,7 @@ MonoBehaviour:
   useSnapTarget: 1
   snapRadius: 0.1
   snapAimBias: 0
-  capital: 9999999
+  capital: 0
   properties: []
   distanceFromPlayer: 0.4
   grabPoint: {x: 0, y: 0, z: 0}
@@ -466,8 +466,6 @@ MonoBehaviour:
   y_button: {fileID: 0}
   b_button: {fileID: 0}
   a_button: {fileID: 0}
-  maxBombs: 1
-  bombs: 0
 --- !u!50 &2837374567193793473
 Rigidbody2D:
   serializedVersion: 5
