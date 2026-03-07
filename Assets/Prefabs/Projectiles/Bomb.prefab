@@ -169,5 +169,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 685b56ffd90de40c1ba9bdcedca230e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pellet
-  speed: 1.75
+  speed: 2
   debug: 0

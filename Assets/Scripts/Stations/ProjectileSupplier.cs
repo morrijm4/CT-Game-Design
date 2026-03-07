@@ -7,7 +7,6 @@ public class ProjectileSupplier : MonoBehaviour
     public void AddPellet(playerController player)
     {
         player.GetComponent<PelletShooter>()?.Increment();
-        player.GetComponent<UIManager>()?.UpdatePelletCount();
     }
     public void AddBomb(playerController player)
     {
@@ -21,6 +20,5 @@ public class ProjectileSupplier : MonoBehaviour
         if (pellets < bombCost) return;
         pelletShooter.SetCount(pellets - bombCost);
         player.GetComponentInParent<BombShooter>()?.Increment();
-        player.GetComponent<UIManager>()?.UpdateBombCount();
     }
 }
