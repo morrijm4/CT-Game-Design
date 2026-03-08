@@ -6,23 +6,24 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
+        Time.timeScale = 0f;
         pauseMenu.SetActive(true);
-        Time.timeScale = 0f; 
     }
-    
+
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void Resume()
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
     }
-    
+
     public void home()
-        {
+    {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
 

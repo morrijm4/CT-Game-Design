@@ -10,30 +10,63 @@ public class MainMenuManager : MonoBehaviour
     public Image progressBarFill;
 
     [Header("Loading Settings")]
-    public float minimumLoadTime = 0.2f; // How many seconds the bar takes to fill
+    public float minimumLoadTime = 0.2f;
+
+    [Header("Audio")]
+    public AudioSource menuMusic;
+    public AudioSource sfxSource;
+    public AudioClip buttonClickSound;
 
     public void OnPlayClicked()
     {
+        PlayClickSound();
         StartCoroutine(LoadGameScene());
     }
 
     public void OnQuitClicked()
     {
+        PlayClickSound();
+        StartCoroutine(QuitAfterSound());
+    }
+
+    void PlayClickSound()
+    {
+        if (sfxSource != null && buttonClickSound != null)
+        {
+            sfxSource.PlayOneShot(buttonClickSound);
+        }
+    }
+
+    IEnumerator QuitAfterSound()
+    {
+        // Wait for the click sound to finish before quitting
+        yield return new WaitForSeconds(buttonClickSound != null ? buttonClickSound.length : 0.2f);
+
         Debug.Log("Quit clicked");
         Application.Quit();
 
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-#endif
+        #endif
     }
 
     IEnumerator LoadGameScene()
     {
+        // Small delay to let the click sound play
+        yield return new WaitForSeconds(0.2f);
+
+        // Store the starting volume for fading
+        float startVolume = 0f;
+        if (menuMusic != null)
+        {
+            startVolume = menuMusic.volume;
+        }
+
         // Show the loading screen
         loadingScreen.SetActive(true);
 
         // Start loading the game scene in the background
-        AsyncOperation operation = SceneManager.LoadSceneAsync("GAL_01");
+        AsyncOperation operation = SceneManager.LoadSceneAsync("Arena");
         operation.allowSceneActivation = false;
 
         float elapsedTime = 0f;
@@ -49,7 +82,7 @@ public class MainMenuManager : MonoBehaviour
             // Calculate the time-based progress (fills over minimumLoadTime seconds)
             float timedProgress = Mathf.Clamp01(elapsedTime / minimumLoadTime);
 
-            // Use whichever is slower — so the bar never jumps ahead
+            // Use whichever is slower so the bar never jumps ahead
             float targetProgress = Mathf.Min(realProgress, timedProgress);
 
             // If real loading is done, let the timer catch up smoothly
@@ -69,8 +102,24 @@ public class MainMenuManager : MonoBehaviour
 
             progressBarFill.fillAmount = displayedProgress;
 
+            // Fade out the music as the loading bar fills up
+            if (menuMusic != null)
+            {
+                menuMusic.volume = startVolume * (1f - displayedProgress);
+            }
+
             yield return null;
         }
+
+        // Make sure the music is fully stopped
+        if (menuMusic != null)
+        {
+            menuMusic.volume = 0f;
+            menuMusic.Stop();
+        }
+
+        // Small pause at full bar before switching scenes
+        yield return new WaitForSeconds(0.5f);
 
         operation.allowSceneActivation = true;
     }
