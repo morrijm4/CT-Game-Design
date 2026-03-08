@@ -10,39 +10,40 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c3dcfb3376eb4d02834bd63a7b90587, type: 3}
-  m_Name: Flag Target
+  m_Name: BlueFlagReturn
   m_EditorClassIdentifier: GameAssemblyLab.GameAssemblies::StationDataSO
-  stationName: Flag Target
-  stationGraphic: {fileID: 21300000, guid: b8c7a902577424f55bcd2a9ab7c252a1, type: 3}
+  stationName: BlueFlagReturn
+  stationGraphic: {fileID: 0}
   stationSpriteTint: {r: 1, g: 1, b: 1, a: 1}
   stationScale: 0.5
   deadSprite: {fileID: 0}
-  stationPrefab: {fileID: 4450516968905769442, guid: 22efd3d35684947109a7fe34574229c3, type: 3}
+  deadSpriteTint: {r: 1, g: 1, b: 1, a: 1}
+  stationPrefab: {fileID: 8814416419054404526, guid: 0a0c6b0bd4222422c9145ee576ec7b7c, type: 3}
   offsetY: 0.5
   uiScale: 0.5
   manualSliderPosition: 0
   sliderOffsetY: -0.46
-  consumeResource: 0
-  produceResource: 1
-  consumes: []
-  produces:
-  - {fileID: 11400000, guid: b27011e8514404f11bb1886ff0f89945, type: 2}
+  consumeResource: 1
+  produceResource: 0
+  consumes:
+  - {fileID: 11400000, guid: a814a701650cd4ee484592a5787f399d, type: 2}
+  produces: []
   whatToProduce: 0
   produceLootTable: {fileID: 0}
   spawnResourcePrefab: 1
-  useInputArea: 0
+  useInputArea: 1
   useOutputArea: 0
   spawnRadius: 0.2
-  isSingleUse: 1
+  isSingleUse: 0
   destroyAfterSingleUse: 1
   capitalInput: 0
   capitalOutput: 0
   capitalInputAmount: 0
   capitalOutputAmount: 0
-  completesGoals_consumption: 0
+  completesGoals_consumption: 1
   completesGoals_production: 0
-  canBeWorked: 1
-  workDuration: 2
+  canBeWorked: 0
+  workDuration: 5
   productionInterval: 5
-  typeOfProduction: 2
-  typeOfConsumption: 0
+  typeOfProduction: 1
+  typeOfConsumption: 1
