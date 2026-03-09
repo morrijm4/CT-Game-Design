@@ -150,11 +150,11 @@ GameObject:
   - component: {fileID: 5031758489567587670}
   - component: {fileID: 2837374567193793473}
   - component: {fileID: 855185347071884907}
-  - component: {fileID: 5319847534122579517}
   - component: {fileID: 7412396093800095126}
   - component: {fileID: 6529118568134941698}
   - component: {fileID: -5691699385362627107}
   - component: {fileID: 8489113680148790352}
+  - component: {fileID: -8772897093640236220}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Player
@@ -341,10 +341,10 @@ MonoBehaviour:
   cManager: {fileID: 0}
   gameManager: {fileID: 0}
   playerInputComponent: {fileID: 0}
-  sprite1: {fileID: 21300000, guid: 5e912b706e68d419e990a7ac2383a460, type: 3}
-  sprite2: {fileID: 21300000, guid: cfa199f7e8cd54ffdb2d1fc4f8e3f8de, type: 3}
-  sprite3: {fileID: 820405171, guid: b9f690056955d4afeb016d855831050a, type: 3}
-  sprite4: {fileID: 820405171, guid: b9f690056955d4afeb016d855831050a, type: 3}
+  sprite1: {fileID: 0}
+  sprite2: {fileID: 0}
+  sprite3: {fileID: 0}
+  sprite4: {fileID: 0}
   characterSprites: []
   playerSprite: {fileID: 8930264680089808671}
   spriteID: 0
@@ -506,20 +506,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 02000000
---- !u!114 &5319847534122579517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3308519254579872422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b58d26a36c724a6391cd0c8ac71305c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TankRespawner
-  respawnDelay: 3
-  invulnerabilityTime: 2
 --- !u!61 &7412396093800095126
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -650,6 +636,21 @@ MonoBehaviour:
   display: {fileID: 0}
   shootSound: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
   debug: 0
+--- !u!114 &-8772897093640236220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3308519254579872422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85bef0d60f0c444efb2bf5cf194001a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TriggerBridge
+  OnEntry:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4308293142968107062
 GameObject:
   m_ObjectHideFlags: 0
