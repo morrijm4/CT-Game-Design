@@ -614,6 +614,8 @@ MonoBehaviour:
   muzzle: {fileID: 2369809150426497948}
   count: 0
   maxProjectiles: 20
+  display: {fileID: 0}
+  shootSound: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
   debug: 0
 --- !u!114 &8489113680148790352
 MonoBehaviour:
@@ -631,6 +633,8 @@ MonoBehaviour:
   muzzle: {fileID: 2369809150426497948}
   count: 0
   maxProjectiles: 2
+  display: {fileID: 0}
+  shootSound: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
   debug: 0
 --- !u!114 &-8772897093640236220
 MonoBehaviour:
