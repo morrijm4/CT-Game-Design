@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &44753784095926830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7516638831133067384}
+  - component: {fileID: 5654320807220500658}
+  m_Layer: 0
+  m_Name: TankRespawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7516638831133067384
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44753784095926830}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 1.6030924, y: -3.4885201, z: 0}
+  m_LocalScale: {x: 12.766118, y: 12.262467, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4448429165320415368}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5654320807220500658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44753784095926830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b58d26a36c724a6391cd0c8ac71305c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TankRespawner
+  respawnDelay: 3
+  invulnerabilityTime: 2
+  tank: {fileID: 7920030897030203474}
 --- !u!1 &6075848751586745762
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,6 +87,7 @@ Transform:
   - {fileID: 3697179384145156719}
   - {fileID: 7835288390503483793}
   - {fileID: 193147301379386623}
+  - {fileID: 7516638831133067384}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &1541173777732861793
@@ -479,6 +527,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4448429165320415368}
     m_Modifications:
+    - target: {fileID: -8772897093640236220, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: OnEntry.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8772897093640236220, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: OnEntry.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8772897093640236220, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: OnEntry.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5654320807220500658}
+    - target: {fileID: -8772897093640236220, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: OnEntry.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8772897093640236220, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: OnEntry.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Die
+      objectReference: {fileID: 0}
+    - target: {fileID: -8772897093640236220, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: OnEntry.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TankRespawner, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: -8772897093640236220, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: OnEntry.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: -5691699385362627107, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
       propertyPath: count
       value: 0
@@ -571,6 +647,11 @@ PrefabInstance:
 --- !u!4 &4598229204750896843 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9210867847299695679, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+  m_PrefabInstance: {fileID: 4612709217451412212}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7920030897030203474 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3308519254579872422, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
   m_PrefabInstance: {fileID: 4612709217451412212}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6966642097973217265
