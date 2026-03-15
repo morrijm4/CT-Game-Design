@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FlagBlue
   m_EditorClassIdentifier: GameAssemblyLab.GameAssemblies::Resource
   resourceName: FlagBlue
-  icon: {fileID: 21300000, guid: b8c7a902577424f55bcd2a9ab7c252a1, type: 3}
+  icon: {fileID: 21300000, guid: a6cd623b243b8624f969a2e0e67566a3, type: 3}
   iconTint: {r: 1, g: 1, b: 1, a: 1}
   resourcePrefab: {fileID: 1116237097334872513, guid: 849910d48f80642baa4c600033466226, type: 3}
   typeOfBehavior: 0

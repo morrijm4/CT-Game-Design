@@ -50,6 +50,7 @@ public class playerController : MonoBehaviour
     public List<GameObject> listObjectsToInspect = new List<GameObject>();
     public bool performingLabor = false;
     public TagType[] grabFilters;
+    public bool disableGrabbing = false;
 
     [Header("Snap Target")]
     [Tooltip("When enabled, the grab area snaps to the nearest grabbable/workable within range, making grabbing and working easier.")]
@@ -838,7 +839,7 @@ public class playerController : MonoBehaviour
     }
     private void GrabObject()
     {
-        if (objectToGrab != null)
+        if (!disableGrabbing && objectToGrab != null)
         {
             isCarryingObject = true;
 

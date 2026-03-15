@@ -468,7 +468,6 @@ public class Station : ResourceNode
             if (debug) Debug.Log("Consume on Work Called Completed Sequence");
             ConsumeResource();
             ConsumeCapital(worker);
-            onConsumption?.Invoke(worker);
             //workCompleted = false;
         }
     }
@@ -479,6 +478,7 @@ public class Station : ResourceNode
         if (debug) Debug.Log("station check: " + inputArea.allRequirementsMet);
         if (inputArea.allRequirementsMet)
         {
+            onConsumption?.Invoke(worker);
             inputArea.RemoveMatchingResources();
             resourcesConsumed = true;
 
