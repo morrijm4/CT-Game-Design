@@ -322,7 +322,7 @@ MonoBehaviour:
     m_ActionId: a3e574b9-2d9a-44de-8c1c-526dade39c9f
     m_ActionName: 'Player/Fire 6[/XInputControllerWindows/rightShoulder]'
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Joystick
   m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -614,6 +614,7 @@ MonoBehaviour:
   muzzle: {fileID: 2369809150426497948}
   count: 0
   maxProjectiles: 20
+  display: {fileID: 0}
   debug: 0
 --- !u!114 &8489113680148790352
 MonoBehaviour:
@@ -631,6 +632,7 @@ MonoBehaviour:
   muzzle: {fileID: 2369809150426497948}
   count: 0
   maxProjectiles: 2
+  display: {fileID: 0}
   debug: 0
 --- !u!114 &-8772897093640236220
 MonoBehaviour:
