@@ -8,4 +8,5 @@ public enum TagType
     Consumable,
     Inspectable,
     Pellet,
+    Flag,
 }

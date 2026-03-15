@@ -6,11 +6,11 @@ public class ProjectileSupplier : MonoBehaviour
 
     public void AddPellet(playerController player)
     {
-        player.GetComponent<PelletShooter>()?.Increment();
+        player.GetComponentInParent<PelletShooter>()?.Increment();
     }
     public void AddBomb(playerController player)
     {
-        PelletShooter pelletShooter = player.GetComponent<PelletShooter>();
+        PelletShooter pelletShooter = player.GetComponentInParent<PelletShooter>();
         if (pelletShooter == null)
         {
             Debug.LogError("Cannot find pellet shooter");

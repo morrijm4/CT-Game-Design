@@ -1,13 +1,10 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
-using Random = UnityEngine.Random; // Add this line
-using UnityEngine.UI;
 using System.Collections;
-using UnityEngine.InputSystem.XR;
+using System.Linq;
 
 public class playerController : MonoBehaviour
 {
@@ -24,17 +21,15 @@ public class playerController : MonoBehaviour
     public List<Sprite> characterSprites;
     public SpriteRenderer playerSprite;
     public int spriteID = 0;
+    public bool rotate = false;
     private bool facingRight = true;
 
     [Header("Speed / Motion")]
     public float playerSpeed = 1f;
     public Rigidbody2D rb;
-    private Vector2 playerVelocity;
     private Vector2 movementInput = Vector2.zero;
 
 
-    private bool fired = false;
-    //public SpriteRenderer spriteRenderer;
     public playersInfo pInfo;
     public int playerID = 0;
     public int playerIDOffset = 0;
@@ -54,6 +49,7 @@ public class playerController : MonoBehaviour
     public GameObject objectToInspect;
     public List<GameObject> listObjectsToInspect = new List<GameObject>();
     public bool performingLabor = false;
+    public TagType[] grabFilters;
 
     [Header("Snap Target")]
     [Tooltip("When enabled, the grab area snaps to the nearest grabbable/workable within range, making grabbing and working easier.")]
@@ -391,6 +387,7 @@ public class playerController : MonoBehaviour
         {
             if (col == null || col.gameObject == null) continue;
             if (!TagUtilities.HasTag(col.gameObject, requiredTag)) continue;
+            if (TagUtilities.HasAnyTag(col.gameObject, grabFilters)) continue;
 
             if (requiredTag == TagType.Grabbable)
             {
@@ -422,6 +419,7 @@ public class playerController : MonoBehaviour
             foreach (var obj in existingList)
             {
                 if (obj == null || !TagUtilities.HasTag(obj, requiredTag)) continue;
+                if (TagUtilities.HasAnyTag(obj, grabFilters)) continue;
                 float d = Vector2.Distance(searchCenter, obj.transform.position);
                 if (d > snapRadius) continue;
 
@@ -607,7 +605,7 @@ public class playerController : MonoBehaviour
 
         FlipCharacter(movementInput.x);
 
-        if (movementInput != Vector2.zero)
+        if (rotate && movementInput != Vector2.zero)
         {
             float angle = Mathf.Atan2(movementInput.y, movementInput.x) * Mathf.Rad2Deg;
             angle -= 90f;
@@ -619,7 +617,6 @@ public class playerController : MonoBehaviour
         if (context.phase == InputActionPhase.Performed)
         {
             if (debug) Debug.Log("Button A Pressed!");
-            fired = context.action.triggered;
             onPlayerButton_A.Invoke();
         }
     }
@@ -627,7 +624,6 @@ public class playerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            fired = context.action.triggered;
             if (debug) Debug.Log("Button B Pressed!");
             onPlayerButton_B.Invoke();
         }
