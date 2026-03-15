@@ -127,6 +127,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 421024132447594402, guid: 5e931ebb68a864aab9286a976cf9c3ce, type: 3}
+      propertyPath: onPlayerButton_A.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 884718355}
+    - target: {fileID: 421024132447594402, guid: 5e931ebb68a864aab9286a976cf9c3ce, type: 3}
+      propertyPath: onPlayerButton_Y.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 884718354}
+    - target: {fileID: 421024132447594402, guid: 5e931ebb68a864aab9286a976cf9c3ce, type: 3}
+      propertyPath: onPlayerButton_A.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Shoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 421024132447594402, guid: 5e931ebb68a864aab9286a976cf9c3ce, type: 3}
+      propertyPath: onPlayerButton_Y.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Shoot
+      objectReference: {fileID: 0}
     - target: {fileID: 1143769745582263118, guid: 5e931ebb68a864aab9286a976cf9c3ce, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -306,7 +322,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6075848751586745762, guid: 5e931ebb68a864aab9286a976cf9c3ce, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 884718355}
+    - targetCorrespondingSourceObject: {fileID: 6075848751586745762, guid: 5e931ebb68a864aab9286a976cf9c3ce, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 884718354}
   m_SourcePrefab: {fileID: 100100000, guid: 5e931ebb68a864aab9286a976cf9c3ce, type: 3}
 --- !u!1 &103892859
 GameObject:
@@ -1235,6 +1257,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bc80d393f1a249d6a56fcd6973702dd, type: 3}
+--- !u!4 &577587393 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6980828211675973992, guid: 5e931ebb68a864aab9286a976cf9c3ce, type: 3}
+  m_PrefabInstance: {fileID: 12034841}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &639867660
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1805,6 +1832,47 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &884718346 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6075848751586745762, guid: 5e931ebb68a864aab9286a976cf9c3ce, type: 3}
+  m_PrefabInstance: {fileID: 12034841}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &884718354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884718346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560859aa788684eb2b0a247bf2be7367, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BombShooter
+  projectile: {fileID: 8400179861900509974, guid: 132f4ba610658479cb5acb9445081b30, type: 3}
+  muzzle: {fileID: 577587393}
+  count: 0
+  maxProjectiles: 2
+  display: {fileID: 1965269095}
+  debug: 0
+--- !u!114 &884718355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884718346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80569f81e7cd24f44af3d3e8d567eb5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PelletShooter
+  projectile: {fileID: 1375569915086783828, guid: a3aab3b7370134335aba1c40f928914c, type: 3}
+  muzzle: {fileID: 577587393}
+  count: 0
+  maxProjectiles: 20
+  display: {fileID: 843408804}
+  debug: 0
 --- !u!4 &904877439 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 870027423092706912, guid: 852198bc984f741edaae361d1779dd90, type: 3}
@@ -5044,7 +5112,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: d11a5d54e5131044aa765dc9b799274c, type: 3}
     - target: {fileID: 2930532511684340442, guid: 550d06e98b8b141108d5b0fafd29dd36, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3482157032860930493, guid: 550d06e98b8b141108d5b0fafd29dd36, type: 3}
       propertyPath: m_AnchorMax.x
@@ -5168,6 +5236,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5926372850165657201, guid: 550d06e98b8b141108d5b0fafd29dd36, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6539642731078818653, guid: 550d06e98b8b141108d5b0fafd29dd36, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6642450719299366426, guid: 550d06e98b8b141108d5b0fafd29dd36, type: 3}
