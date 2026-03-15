@@ -475,8 +475,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8814416419054404526, guid: 0a0c6b0bd4222422c9145ee576ec7b7c, type: 3}
       propertyPath: m_Name
-      value: BlueFlagReturn
+      value: RedFlagReturn
       objectReference: {fileID: 0}
+    - target: {fileID: 8833234046014874988, guid: 0a0c6b0bd4222422c9145ee576ec7b7c, type: 3}
+      propertyPath: stationData
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e3a67da2ad0341adb6a190971ef49b9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
