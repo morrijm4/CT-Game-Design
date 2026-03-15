@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class TankRespawner : MonoBehaviour
+public class Respawner : MonoBehaviour
 {
     public float respawnDelay = 3f;
     public float invulnerabilityTime = 2f;
-    public GameObject tank;
+    public GameObject player;
     private Shooter[] shooters;
     private SpriteRenderer[] renderers;
     private Collider2D[] colliders;
@@ -16,15 +16,15 @@ public class TankRespawner : MonoBehaviour
 
     void Awake()
     {
-        shooters = tank.GetComponents<Shooter>();
-        renderers = tank.GetComponentsInChildren<SpriteRenderer>();
-        colliders = tank.GetComponentsInChildren<Collider2D>();
-        particleSystems = tank.GetComponentsInChildren<ParticleSystem>();
+        shooters = player.GetComponents<Shooter>();
+        renderers = player.GetComponentsInChildren<SpriteRenderer>();
+        colliders = player.GetComponentsInChildren<Collider2D>();
+        particleSystems = player.GetComponentsInChildren<ParticleSystem>();
     }
 
     void Start()
     {
-        this.spawnPosition = this.tank.transform.position;
+        this.spawnPosition = this.player.transform.position;
     }
 
     public void Die(Collider2D other)
@@ -61,7 +61,7 @@ public class TankRespawner : MonoBehaviour
         SetTankActive(false);
 
         yield return new WaitForSeconds(this.respawnDelay);
-        tank.transform.position = this.spawnPosition;
+        player.transform.position = this.spawnPosition;
         SetTankActive(true);
 
         yield return new WaitForSeconds(this.invulnerabilityTime);

@@ -113,7 +113,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 100
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 5e912b706e68d419e990a7ac2383a460, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a83ff41e6f6af496789567f6631afa65, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -152,12 +152,10 @@ GameObject:
   - component: {fileID: 855185347071884907}
   - component: {fileID: 7412396093800095126}
   - component: {fileID: 6529118568134941698}
-  - component: {fileID: -5691699385362627107}
-  - component: {fileID: 8489113680148790352}
   - component: {fileID: -8772897093640236220}
-  - component: {fileID: 6416586521564384071}
+  - component: {fileID: 6142074922999764087}
   m_Layer: 0
-  m_Name: Tank
+  m_Name: Helper
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -323,7 +321,7 @@ MonoBehaviour:
     m_ActionId: a3e574b9-2d9a-44de-8c1c-526dade39c9f
     m_ActionName: 'Player/Fire 6[/XInputControllerWindows/rightShoulder]'
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Joystick
+  m_DefaultControlScheme: 
   m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -349,7 +347,7 @@ MonoBehaviour:
   characterSprites: []
   playerSprite: {fileID: 8930264680089808671}
   spriteID: 0
-  rotate: 1
+  rotate: 0
   playerSpeed: 1.5
   rb: {fileID: 2837374567193793473}
   pInfo: {fileID: 0}
@@ -366,7 +364,7 @@ MonoBehaviour:
   objectToInspect: {fileID: 0}
   listObjectsToInspect: []
   performingLabor: 0
-  grabFilters: 08000000
+  grabFilters: 
   useSnapTarget: 1
   snapRadius: 0.1
   snapAimBias: 0
@@ -381,7 +379,7 @@ MonoBehaviour:
   onPlayerButton_A:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -5691699385362627107}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PelletShooter, Assembly-CSharp
         m_MethodName: Shoot
         m_Mode: 1
@@ -426,7 +424,7 @@ MonoBehaviour:
   onPlayerButton_Y:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8489113680148790352}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BombShooter, Assembly-CSharp
         m_MethodName: Shoot
         m_Mode: 1
@@ -542,7 +540,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.000000059604645, y: -0.092928976}
+  m_Offset: {x: -0.04974878, y: 0.012448549}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -552,7 +550,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.4364307, y: 0.81414205}
+  m_Size: {x: 3.3215663, y: 7.205828}
   m_EdgeRadius: 0
 --- !u!61 &6529118568134941698
 BoxCollider2D:
@@ -588,7 +586,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0009992123, y: -0.092928946}
+  m_Offset: {x: -0.050744057, y: -0.0051151514}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -598,44 +596,8 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.43842906, y: 0.8141421}
+  m_Size: {x: 3.323557, y: 4.8528347}
   m_EdgeRadius: 0
---- !u!114 &-5691699385362627107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3308519254579872422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80569f81e7cd24f44af3d3e8d567eb5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PelletShooter
-  projectile: {fileID: 1375569915086783828, guid: a3aab3b7370134335aba1c40f928914c, type: 3}
-  muzzle: {fileID: 2369809150426497948}
-  count: 0
-  maxProjectiles: 20
-  display: {fileID: 0}
-  debug: 0
---- !u!114 &8489113680148790352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3308519254579872422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 560859aa788684eb2b0a247bf2be7367, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BombShooter
-  projectile: {fileID: 8400179861900509974, guid: 132f4ba610658479cb5acb9445081b30, type: 3}
-  muzzle: {fileID: 2369809150426497948}
-  count: 0
-  maxProjectiles: 2
-  display: {fileID: 0}
-  debug: 0
 --- !u!114 &-8772897093640236220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -650,8 +612,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TriggerBridge
   OnEntry:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &6416586521564384071
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6142074922999764087
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -693,7 +667,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1.4}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9210867847299695679}
@@ -786,7 +760,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.00107, y: 0.00141, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9210867847299695679}
@@ -858,7 +832,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6299017918995571359}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -934,7 +908,7 @@ Transform:
   m_GameObject: {fileID: 7405483986899148852}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.001, y: 0.718, z: 0}
+  m_LocalPosition: {x: 0.001, y: 0.653, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class grabRegion : MonoBehaviour
@@ -10,16 +7,10 @@ public class grabRegion : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pController = transform.parent.GetComponent <playerController>();
+        pController = transform.parent.GetComponent<playerController>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter2D(Collider2D  other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (debug) Debug.Log("In Trigger with: " + other);
         // When absorbing (Y held), playerConsumeArea handles multigrab—don't add here to avoid double-add
@@ -73,30 +64,30 @@ public class grabRegion : MonoBehaviour
             }
 
         }
-            if (TagUtilities.HasTag(other.gameObject, TagType.Workable))
+        if (TagUtilities.HasTag(other.gameObject, TagType.Workable))
+        {
+            if (debug) Debug.Log("LABOR OBJECT RELEASED");
+            pController.listObjectsToLabor.Remove(other.gameObject);
+            if (pController.objectToLabor == other.gameObject)
             {
-                if (debug) Debug.Log("LABOR OBJECT RELEASED");
-                pController.listObjectsToLabor.Remove(other.gameObject);
-                if (pController.objectToLabor == other.gameObject)
-                {
-                    pController.cancelLabor();
-                    pController.objectToLabor = null;
-                    var station = other.gameObject.GetComponent<Station>();
-                    if (station != null) station.isBeingInspected = false;
-                }
+                pController.cancelLabor();
+                pController.objectToLabor = null;
+                var station = other.gameObject.GetComponent<Station>();
+                if (station != null) station.isBeingInspected = false;
             }
-            if (TagUtilities.HasTag(other.gameObject, TagType.Inspectable))
+        }
+        if (TagUtilities.HasTag(other.gameObject, TagType.Inspectable))
+        {
+            if (debug) Debug.Log("INSPECTABLE OBJECT RELEASED");
+            pController.listObjectsToInspect.Remove(other.gameObject);
+            if (pController.objectToInspect == other.gameObject)
             {
-                if (debug) Debug.Log("INSPECTABLE OBJECT RELEASED");
-                pController.listObjectsToInspect.Remove(other.gameObject);
-                if (pController.objectToInspect == other.gameObject)
-                {
-                    pController.objectToInspect = null;
-                    var station = other.gameObject.GetComponent<Station>();
-                    if (station != null) station.isBeingInspected = false;
-                }
+                pController.objectToInspect = null;
+                var station = other.gameObject.GetComponent<Station>();
+                if (station != null) station.isBeingInspected = false;
             }
-       // }
+        }
+        // }
     }
 
 }
