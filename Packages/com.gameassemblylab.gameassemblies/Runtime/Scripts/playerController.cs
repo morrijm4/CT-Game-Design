@@ -39,9 +39,6 @@ public class playerController : MonoBehaviour
     public int playerID = 0;
     public int playerIDOffset = 0;
 
-    [Tooltip("Unique index per tank (0-3). When gamepads are connected, each index maps to a gamepad. When no gamepad is available at this index, falls back to keyboard (even=WASD, odd=Arrows). -1 = auto from spawn order.")]
-    public int controlSchemeIndex = -1;
-
     public bool isCarryingObject = false;
     public Transform carryPosition;
     public GameObject objectToGrab;
@@ -100,77 +97,11 @@ public class playerController : MonoBehaviour
 
     public AudioSource inspectSound;
 
-    private string _gamepadScheme;
-    private string _keyboardScheme;
-
     [Header("UI Buttons")]
     public GameObject x_button;
     public GameObject y_button;
     public GameObject b_button;
     public GameObject a_button;
-
-    private void DetectControlSchemeNames()
-    {
-        _gamepadScheme = "Joystick";
-        _keyboardScheme = "Keyboard";
-
-        if (playerInputComponent?.actions == null) return;
-
-        bool hasJoystick = false, hasGamepad = false;
-        bool hasKeyboard = false, hasKeyboardArrows = false, hasKeyboardMouse = false;
-
-        foreach (var scheme in playerInputComponent.actions.controlSchemes)
-        {
-            switch (scheme.name)
-            {
-                case "Joystick":       hasJoystick = true; break;
-                case "Gamepad":        hasGamepad = true; break;
-                case "Keyboard":       hasKeyboard = true; break;
-                case "KeyboardArrows": hasKeyboardArrows = true; break;
-                case "Keyboard&Mouse": hasKeyboardMouse = true; break;
-            }
-        }
-
-        _gamepadScheme = hasJoystick ? "Joystick" : hasGamepad ? "Gamepad" : "Joystick";
-
-        int index = (controlSchemeIndex >= 0) ? controlSchemeIndex : 0;
-        if (hasKeyboard && hasKeyboardArrows)
-            _keyboardScheme = (index % 2 == 0) ? "Keyboard" : "KeyboardArrows";
-        else if (hasKeyboardMouse)
-            _keyboardScheme = "Keyboard&Mouse";
-        else if (hasKeyboard)
-            _keyboardScheme = "Keyboard";
-    }
-
-    private string GetKeyboardSchemeForIndex(int index)
-    {
-        if (playerInputComponent?.actions == null)
-            return (index % 2 == 0) ? "Keyboard" : "KeyboardArrows";
-
-        bool hasKeyboard = false, hasKeyboardArrows = false, hasKeyboardMouse = false;
-        foreach (var scheme in playerInputComponent.actions.controlSchemes)
-        {
-            switch (scheme.name)
-            {
-                case "Keyboard":       hasKeyboard = true; break;
-                case "KeyboardArrows": hasKeyboardArrows = true; break;
-                case "Keyboard&Mouse": hasKeyboardMouse = true; break;
-            }
-        }
-
-        if (hasKeyboard && hasKeyboardArrows)
-            return (index % 2 == 0) ? "Keyboard" : "KeyboardArrows";
-        if (hasKeyboardMouse)
-            return "Keyboard&Mouse";
-        if (hasKeyboard)
-            return "Keyboard";
-        return "Keyboard&Mouse";
-    }
-
-    private bool IsGamepadScheme(string scheme)
-    {
-        return scheme == "Joystick" || scheme == "Gamepad";
-    }
 
     private void OnEnable()
     {
@@ -201,8 +132,6 @@ public class playerController : MonoBehaviour
         gameManager = GameObject.FindFirstObjectByType<GameManager>();
 
         playerInputComponent = GetComponent<PlayerInput>();
-        DetectControlSchemeNames();
-
         //add yourself to the player list
         pInfo = GameObject.FindFirstObjectByType<playersInfo>(); // Get the players info component
         playerID = pInfo.allPlayers.Count; // Set the player ID to the current number of players
@@ -264,44 +193,15 @@ public class playerController : MonoBehaviour
         pInfo.allPlayers.Add(transform.gameObject);
         pInfo.allControllers.Add(this);
 
-        // Assign control scheme: prefer gamepad if one is available at this player's
-        // index, otherwise fall back to keyboard.
-        // Set controlSchemeIndex in Inspector to 0-3 for each tank, or -1 to auto-assign from playerID.
+        // Delegate control scheme assignment to PlayerControlSchemeAssigner (if present)
+        var schemeAssigner = GetComponent<PlayerControlSchemeAssigner>();
+        if (schemeAssigner != null)
+        {
+            schemeAssigner.Initialize(playerInputComponent, playerID);
+        }
+
         if (playerInputComponent != null)
         {
-            int index = (controlSchemeIndex >= 0) ? controlSchemeIndex : playerID;
-
-            if (Gamepad.all.Count > index)
-            {
-                var gamepad = Gamepad.all[index];
-                try
-                {
-                    playerInputComponent.SwitchCurrentControlScheme(_gamepadScheme, gamepad);
-                    if (debug) Debug.Log("Player " + playerID + " assigned to Gamepad " + index + " (" + gamepad.displayName + ") scheme=" + _gamepadScheme);
-                }
-                catch (Exception ex)
-                {
-                    if (debug) Debug.LogWarning("Could not assign gamepad " + index + ": " + ex.Message);
-                }
-            }
-            else
-            {
-                string scheme = GetKeyboardSchemeForIndex(index);
-                var keyboard = Keyboard.current;
-                try
-                {
-                    if (keyboard != null)
-                        playerInputComponent.SwitchCurrentControlScheme(scheme, keyboard);
-                    else
-                        playerInputComponent.SwitchCurrentControlScheme(scheme);
-                    if (debug) Debug.Log("Player " + playerID + " (no gamepad at index " + index + ") -> " + scheme);
-                }
-                catch (Exception ex)
-                {
-                    if (debug) Debug.LogWarning("Could not switch control scheme to " + scheme + ": " + ex.Message);
-                }
-            }
-
             if (gameManager == null || gameManager.CurrentState == GameState.Playing)
                 playerInputComponent.SwitchCurrentActionMap("Player");
         }
@@ -330,8 +230,6 @@ public class playerController : MonoBehaviour
     //-MULTI OBJECT GRAB ->          NOT WORKING
     void Update()
     {
-        CheckRuntimeControlSchemeSwitch();
-
         if (performingLabor) PerformLabor();
         if (isAbsorbingResources) AbsorbResources();
 
@@ -344,56 +242,6 @@ public class playerController : MonoBehaviour
         }
 
         if (b_button != null) displayButtons();
-    }
-
-    private void CheckRuntimeControlSchemeSwitch()
-    {
-        if (playerInputComponent == null) return;
-
-        int index = (controlSchemeIndex >= 0) ? controlSchemeIndex : playerID;
-        string currentScheme = playerInputComponent.currentControlScheme;
-
-        if (IsGamepadScheme(currentScheme))
-        {
-            var kb = Keyboard.current;
-            if (kb == null) return;
-
-            bool keyboardActive = (index % 2 == 0)
-                ? kb.wKey.isPressed || kb.aKey.isPressed || kb.sKey.isPressed || kb.dKey.isPressed
-                : kb.upArrowKey.isPressed || kb.downArrowKey.isPressed || kb.leftArrowKey.isPressed || kb.rightArrowKey.isPressed;
-
-            if (keyboardActive)
-            {
-                string scheme = GetKeyboardSchemeForIndex(index);
-                try
-                {
-                    playerInputComponent.SwitchCurrentControlScheme(scheme, kb);
-                    if (debug) Debug.Log("Player " + playerID + " switched to " + scheme);
-                }
-                catch (Exception) { }
-            }
-        }
-        else
-        {
-            if (Gamepad.all.Count > index)
-            {
-                var gp = Gamepad.all[index];
-                bool gamepadActive = gp.leftStick.ReadValue().sqrMagnitude > 0.01f
-                    || gp.buttonSouth.isPressed || gp.buttonEast.isPressed
-                    || gp.buttonWest.isPressed || gp.buttonNorth.isPressed
-                    || gp.startButton.isPressed;
-
-                if (gamepadActive)
-                {
-                    try
-                    {
-                        playerInputComponent.SwitchCurrentControlScheme(_gamepadScheme, gp);
-                        if (debug) Debug.Log("Player " + playerID + " switched to " + _gamepadScheme + " (Gamepad " + index + ")");
-                    }
-                    catch (Exception) { }
-                }
-            }
-        }
     }
 
     /// <summary>
