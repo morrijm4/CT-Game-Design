@@ -39,9 +39,6 @@ public class playerController : MonoBehaviour
     public int playerID = 0;
     public int playerIDOffset = 0;
 
-    [Tooltip("Control scheme: 0 = WASD (red tank), 1 = Arrows (blue tank). Set in Inspector on each tank instance so red always gets 0, blue gets 1. -1 = auto from spawn order.")]
-    public int controlSchemeIndex = -1;
-
     public bool isCarryingObject = false;
     public Transform carryPosition;
     public GameObject objectToGrab;
@@ -135,7 +132,6 @@ public class playerController : MonoBehaviour
         gameManager = GameObject.FindFirstObjectByType<GameManager>();
 
         playerInputComponent = GetComponent<PlayerInput>();
-
         //add yourself to the player list
         pInfo = GameObject.FindFirstObjectByType<playersInfo>(); // Get the players info component
         playerID = pInfo.allPlayers.Count; // Set the player ID to the current number of players
@@ -197,27 +193,15 @@ public class playerController : MonoBehaviour
         pInfo.allPlayers.Add(transform.gameObject);
         pInfo.allControllers.Add(this);
 
-        // When using a single prefab for both tanks: assign control scheme so
-        // one tank gets WASD (Keyboard) and the other Arrows (KeyboardArrows).
-        // Use controlSchemeIndex in Inspector: 0 = red/WASD, 1 = blue/Arrows; -1 = auto from playerID.
+        // Delegate control scheme assignment to PlayerControlSchemeAssigner (if present)
+        var schemeAssigner = GetComponent<PlayerControlSchemeAssigner>();
+        if (schemeAssigner != null)
+        {
+            schemeAssigner.Initialize(playerInputComponent, playerID);
+        }
+
         if (playerInputComponent != null)
         {
-            int index = (controlSchemeIndex >= 0) ? controlSchemeIndex : playerID;
-            string scheme = (index == 0) ? "Keyboard" : "KeyboardArrows";
-            var keyboard = Keyboard.current;
-            try
-            {
-                if (keyboard != null)
-                    playerInputComponent.SwitchCurrentControlScheme(scheme, keyboard);
-                else
-                    playerInputComponent.SwitchCurrentControlScheme(scheme);
-                if (debug) Debug.Log("Player " + playerID + " (controlSchemeIndex=" + index + ") -> " + scheme);
-            }
-            catch (Exception ex)
-            {
-                if (debug) Debug.LogWarning("Could not switch control scheme to " + scheme + ": " + ex.Message);
-            }
-            // Use Player action map when playing so movement/actions work; HandleGameStateChanged switches to UI for menu/pause.
             if (gameManager == null || gameManager.CurrentState == GameState.Playing)
                 playerInputComponent.SwitchCurrentActionMap("Player");
         }
