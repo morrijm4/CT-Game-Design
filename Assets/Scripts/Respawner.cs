@@ -5,7 +5,7 @@ public class Respawner : MonoBehaviour
 {
     public float respawnDelay = 3f;
     public float invulnerabilityTime = 2f;
-    public GameObject player;
+    public playerController player;
     private Shooter[] shooters;
     private SpriteRenderer[] renderers;
     private Collider2D[] colliders;
@@ -16,7 +16,7 @@ public class Respawner : MonoBehaviour
 
     void Awake()
     {
-        shooters = player.GetComponents<Shooter>();
+        shooters = player.GetComponentsInParent<Shooter>();
         renderers = player.GetComponentsInChildren<SpriteRenderer>();
         colliders = player.GetComponentsInChildren<Collider2D>();
         particleSystems = player.GetComponentsInChildren<ParticleSystem>();
@@ -30,6 +30,8 @@ public class Respawner : MonoBehaviour
     public void Die(Collider2D other)
     {
         if (!other.CompareTag("Pellet") || this.isInvulnerable) return;
+
+        if (player.isCarryingObject) player.GrabDrop();
 
         StartCoroutine(RespawnRoutine());
 
