@@ -47,6 +47,7 @@ MonoBehaviour:
   respawnDelay: 3
   invulnerabilityTime: 2
   player: {fileID: 2930532511684340442}
+  display: {fileID: 0}
 --- !u!1 &5830556259058831537
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +95,52 @@ MonoBehaviour:
   respawnDelay: 3
   invulnerabilityTime: 2
   player: {fileID: 6539642731078818653}
+  display: {fileID: 0}
+--- !u!1 &8798953882394073608
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8423628019265940925}
+  - component: {fileID: 4258077617685299896}
+  m_Layer: 0
+  m_Name: CivilianCounter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8423628019265940925
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8798953882394073608}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -48.10576, y: 55.111267, z: 0}
+  m_LocalScale: {x: 12.425017, y: 13.158146, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4168331776312289508}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4258077617685299896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8798953882394073608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 348cca6f4f819499aae333d1fadeca0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Counter
+  display: {fileID: 0}
 --- !u!1 &9004690050193589305
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,6 +184,7 @@ Transform:
   - {fileID: 5274822661439933750}
   - {fileID: 9217753392729125971}
   - {fileID: 646496691233529284}
+  - {fileID: 8423628019265940925}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &3822794221860579523
@@ -621,6 +669,34 @@ PrefabInstance:
       propertyPath: stationData
       value: 
       objectReference: {fileID: 11400000, guid: c9d38b69e5a0c4326881a0569c05894f, type: 2}
+    - target: {fileID: 9078596488521882801, guid: 5dff931a1bdaa410b83449fe3feed7bf, type: 3}
+      propertyPath: onConsumption.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9078596488521882801, guid: 5dff931a1bdaa410b83449fe3feed7bf, type: 3}
+      propertyPath: onConsumption.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9078596488521882801, guid: 5dff931a1bdaa410b83449fe3feed7bf, type: 3}
+      propertyPath: onConsumption.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4258077617685299896}
+    - target: {fileID: 9078596488521882801, guid: 5dff931a1bdaa410b83449fe3feed7bf, type: 3}
+      propertyPath: onConsumption.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9078596488521882801, guid: 5dff931a1bdaa410b83449fe3feed7bf, type: 3}
+      propertyPath: onConsumption.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Increment
+      objectReference: {fileID: 0}
+    - target: {fileID: 9078596488521882801, guid: 5dff931a1bdaa410b83449fe3feed7bf, type: 3}
+      propertyPath: onConsumption.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Counter, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 9078596488521882801, guid: 5dff931a1bdaa410b83449fe3feed7bf, type: 3}
+      propertyPath: onConsumption.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

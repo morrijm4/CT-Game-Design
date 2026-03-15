@@ -1,21 +1,26 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Respawner : MonoBehaviour
 {
     public float respawnDelay = 3f;
     public float invulnerabilityTime = 2f;
-    public playerController player;
+    public GameObject player;
+    public Text display;
+    private playerController playerController;
     private Shooter[] shooters;
     private SpriteRenderer[] renderers;
     private Collider2D[] colliders;
     private ParticleSystem[] particleSystems;
+    private int count = 0;
 
     private Vector3 spawnPosition;
     private bool isInvulnerable = false;
 
     void Awake()
     {
+        playerController = player.GetComponent<playerController>();
         shooters = player.GetComponentsInParent<Shooter>();
         renderers = player.GetComponentsInChildren<SpriteRenderer>();
         colliders = player.GetComponentsInChildren<Collider2D>();
@@ -31,18 +36,22 @@ public class Respawner : MonoBehaviour
     {
         if (!other.CompareTag("Pellet") || this.isInvulnerable) return;
 
-        if (player.isCarryingObject) player.GrabDrop();
-
         StartCoroutine(RespawnRoutine());
+
+        if (playerController.isCarryingObject) playerController.GrabDrop();
 
         foreach (var shooter in shooters)
         {
             shooter.SetCount(0);
         }
+
+        count++;
+        if (display) display.text = "x " + count.ToString();
     }
 
     void SetTankActive(bool enabled)
     {
+        playerController.disableGrabbing = !enabled;
         foreach (var renderer in renderers)
         {
             renderer.enabled = enabled;

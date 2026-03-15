@@ -23,8 +23,9 @@ public class Area : MonoBehaviour
     public List<GameObject> areaContains = new List<GameObject>();
 
     public List<Resource> requirements = new List<Resource>();
+    public UnityEvent onRemove;
 
-    
+
 
     public enum areaType
     {
@@ -82,13 +83,14 @@ public class Area : MonoBehaviour
         if (sortAsGrid) ArrangeObjectsInGrid();
         if (lockInside) LockResourcesInside();
 
-        if (TypeOfArea == areaType.Absorb )
+        if (TypeOfArea == areaType.Absorb)
         {
             FindResourcesWithinRadius();
             //PullResources();
             PullResourcesWithTween();
             UpdateUI();
-        }else if (TypeOfArea == areaType.InputAbsorb)
+        }
+        else if (TypeOfArea == areaType.InputAbsorb)
         {
             FindResourcesWithinRadius();
             PullResourcesWithTween();
@@ -97,7 +99,7 @@ public class Area : MonoBehaviour
 
     public void LateUpdate()
     {
-        
+
     }
 
     //very poor performance
@@ -116,9 +118,9 @@ public class Area : MonoBehaviour
             GameObject resource = ((ResourceObject)r).gameObject;
 
             ResourceObject rObj = resource.GetComponent<ResourceObject>();
-            
-            if(rObj.resourceType == requirements[0])
-            {   
+
+            if (rObj.resourceType == requirements[0])
+            {
                 float distance = Vector2.Distance(transform.position, resource.transform.position);
                 //resource.GetComponent<BoxCollider2D>().isTrigger = true;
                 // Add to the list if within the pull radius
@@ -143,7 +145,7 @@ public class Area : MonoBehaviour
 
             }
 
-            
+
         }
     }
     private void PullResources()
@@ -189,10 +191,10 @@ public class Area : MonoBehaviour
 
             // Apply an easing function from the Tween class
             float easedT = Tween.EaseInOutQuad(t); // Choose any easing function here
-            //float easedT = Tween.EaseInQuad(t); // Choose any easing function here
-            //float easedT = Tween.BounceBackEaseIn(t); // Choose any easing function here
-            //float easedT = Tween.EaseOutBack(t); // Choose any easing function here
-            
+                                                   //float easedT = Tween.EaseInQuad(t); // Choose any easing function here
+                                                   //float easedT = Tween.BounceBackEaseIn(t); // Choose any easing function here
+                                                   //float easedT = Tween.EaseOutBack(t); // Choose any easing function here
+
             // Interpolate the position based on eased time
             if (resource != null) resource.position = Vector3.Lerp(startPosition, targetPosition, easedT);
 
@@ -224,12 +226,12 @@ public class Area : MonoBehaviour
                 //Debug.Log("Resource Entered of Type: " + TagType.Resource.ToString());
                 areaContains.Add(other.gameObject);
 
-                if(lockInside) other.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                if (lockInside) other.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
 
                 //AUDIO - FEEDBACK:
                 //check if its in the required resources:
                 ResourceObject resourceObject = other.GetComponent<ResourceObject>();
-                if(requirements.Contains(resourceObject.resourceType))
+                if (requirements.Contains(resourceObject.resourceType))
                 {
                     if (outputAudio == null || successSound == null || particleObject == null) return;
                     outputAudio.clip = successSound;
@@ -238,7 +240,8 @@ public class Area : MonoBehaviour
                     destroyObject.GetComponent<ParticleSystemRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder;
 
                     //CameraShake.Shake(0.3f, 0.05f, 3f);
-                } else
+                }
+                else
                 {
                     playErrorSequence();
                 }
@@ -352,12 +355,14 @@ public class Area : MonoBehaviour
                     areaContains.RemoveAt(i);
                     resourceObject.InstantiateParticles(); //do this not on destroy any more
                     Destroy(obj);
+                    onRemove?.Invoke();
                     if (debug) Debug.Log($"Removed {obj.name} from areaContains because it matched a requirement.");
                 }
             }
 
             return true; // All required resources have been removed
-        } else
+        }
+        else
         {
             return false; // Not all requirements are met
         }
@@ -365,7 +370,7 @@ public class Area : MonoBehaviour
 
     private void execurteRemoveOfResources()
     {
-        
+
     }
 
     public Vector2 GetPosition()
@@ -374,7 +379,7 @@ public class Area : MonoBehaviour
     }
     public Vector2 GetPositionWithRandomness(float scaleFactor)
     {
-        
+
         float randomX = Random.Range(-1, 1);
         float randomY = Random.Range(-1, 1);
         float randomZ = Random.Range(0, 0);
@@ -429,7 +434,8 @@ public class Area : MonoBehaviour
             if (requiredCounts.ContainsKey(req))
             {
                 requiredCounts[req]++;
-            } else
+            }
+            else
             {
                 requiredCounts[req] = 1;
             }
@@ -449,7 +455,8 @@ public class Area : MonoBehaviour
                 if (availableCounts.ContainsKey(resourceType))
                 {
                     availableCounts[resourceType]++;
-                } else
+                }
+                else
                 {
                     availableCounts[resourceType] = 1;
                 }
