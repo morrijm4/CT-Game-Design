@@ -39,7 +39,7 @@ public class playerController : MonoBehaviour
     public int playerID = 0;
     public int playerIDOffset = 0;
 
-    [Tooltip("Control scheme: 0 = WASD (red tank), 1 = Arrows (blue tank). Set in Inspector on each tank instance so red always gets 0, blue gets 1. -1 = auto from spawn order.")]
+    [Tooltip("Unique index per tank (0-3). When gamepads are connected, each index maps to a gamepad. When no gamepad is available at this index, falls back to keyboard (even=WASD, odd=Arrows). -1 = auto from spawn order.")]
     public int controlSchemeIndex = -1;
 
     public bool isCarryingObject = false;
@@ -197,27 +197,44 @@ public class playerController : MonoBehaviour
         pInfo.allPlayers.Add(transform.gameObject);
         pInfo.allControllers.Add(this);
 
-        // When using a single prefab for both tanks: assign control scheme so
-        // one tank gets WASD (Keyboard) and the other Arrows (KeyboardArrows).
-        // Use controlSchemeIndex in Inspector: 0 = red/WASD, 1 = blue/Arrows; -1 = auto from playerID.
+        // Assign control scheme: prefer gamepad if one is available at this player's
+        // index, otherwise fall back to keyboard (WASD / Arrows).
+        // Set controlSchemeIndex in Inspector to 0-3 for each tank, or -1 to auto-assign from playerID.
         if (playerInputComponent != null)
         {
             int index = (controlSchemeIndex >= 0) ? controlSchemeIndex : playerID;
-            string scheme = (index == 0) ? "Keyboard" : "KeyboardArrows";
-            var keyboard = Keyboard.current;
-            try
+
+            if (Gamepad.all.Count > index)
             {
-                if (keyboard != null)
-                    playerInputComponent.SwitchCurrentControlScheme(scheme, keyboard);
-                else
-                    playerInputComponent.SwitchCurrentControlScheme(scheme);
-                if (debug) Debug.Log("Player " + playerID + " (controlSchemeIndex=" + index + ") -> " + scheme);
+                var gamepad = Gamepad.all[index];
+                try
+                {
+                    playerInputComponent.SwitchCurrentControlScheme("Joystick", gamepad);
+                    if (debug) Debug.Log("Player " + playerID + " assigned to Gamepad " + index + " (" + gamepad.displayName + ")");
+                }
+                catch (Exception ex)
+                {
+                    if (debug) Debug.LogWarning("Could not assign gamepad " + index + ": " + ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                if (debug) Debug.LogWarning("Could not switch control scheme to " + scheme + ": " + ex.Message);
+                string scheme = (index % 2 == 0) ? "Keyboard" : "KeyboardArrows";
+                var keyboard = Keyboard.current;
+                try
+                {
+                    if (keyboard != null)
+                        playerInputComponent.SwitchCurrentControlScheme(scheme, keyboard);
+                    else
+                        playerInputComponent.SwitchCurrentControlScheme(scheme);
+                    if (debug) Debug.Log("Player " + playerID + " (no gamepad at index " + index + ") -> " + scheme);
+                }
+                catch (Exception ex)
+                {
+                    if (debug) Debug.LogWarning("Could not switch control scheme to " + scheme + ": " + ex.Message);
+                }
             }
-            // Use Player action map when playing so movement/actions work; HandleGameStateChanged switches to UI for menu/pause.
+
             if (gameManager == null || gameManager.CurrentState == GameState.Playing)
                 playerInputComponent.SwitchCurrentActionMap("Player");
         }
@@ -246,6 +263,8 @@ public class playerController : MonoBehaviour
     //-MULTI OBJECT GRAB ->          NOT WORKING
     void Update()
     {
+        CheckRuntimeControlSchemeSwitch();
+
         if (performingLabor) PerformLabor();
         if (isAbsorbingResources) AbsorbResources();
 
@@ -258,6 +277,56 @@ public class playerController : MonoBehaviour
         }
 
         if (b_button != null) displayButtons();
+    }
+
+    private void CheckRuntimeControlSchemeSwitch()
+    {
+        if (playerInputComponent == null) return;
+
+        int index = (controlSchemeIndex >= 0) ? controlSchemeIndex : playerID;
+        string currentScheme = playerInputComponent.currentControlScheme;
+
+        if (currentScheme == "Joystick")
+        {
+            var kb = Keyboard.current;
+            if (kb == null) return;
+
+            bool keyboardActive = (index % 2 == 0)
+                ? kb.wKey.isPressed || kb.aKey.isPressed || kb.sKey.isPressed || kb.dKey.isPressed
+                : kb.upArrowKey.isPressed || kb.downArrowKey.isPressed || kb.leftArrowKey.isPressed || kb.rightArrowKey.isPressed;
+
+            if (keyboardActive)
+            {
+                string scheme = (index % 2 == 0) ? "Keyboard" : "KeyboardArrows";
+                try
+                {
+                    playerInputComponent.SwitchCurrentControlScheme(scheme, kb);
+                    if (debug) Debug.Log("Player " + playerID + " switched to " + scheme);
+                }
+                catch (Exception) { }
+            }
+        }
+        else
+        {
+            if (Gamepad.all.Count > index)
+            {
+                var gp = Gamepad.all[index];
+                bool gamepadActive = gp.leftStick.ReadValue().sqrMagnitude > 0.01f
+                    || gp.buttonSouth.isPressed || gp.buttonEast.isPressed
+                    || gp.buttonWest.isPressed || gp.buttonNorth.isPressed
+                    || gp.startButton.isPressed;
+
+                if (gamepadActive)
+                {
+                    try
+                    {
+                        playerInputComponent.SwitchCurrentControlScheme("Joystick", gp);
+                        if (debug) Debug.Log("Player " + playerID + " switched to Joystick (Gamepad " + index + ")");
+                    }
+                    catch (Exception) { }
+                }
+            }
+        }
     }
 
     /// <summary>
