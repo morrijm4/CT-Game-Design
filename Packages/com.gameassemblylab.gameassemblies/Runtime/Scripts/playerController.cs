@@ -100,11 +100,77 @@ public class playerController : MonoBehaviour
 
     public AudioSource inspectSound;
 
+    private string _gamepadScheme;
+    private string _keyboardScheme;
+
     [Header("UI Buttons")]
     public GameObject x_button;
     public GameObject y_button;
     public GameObject b_button;
     public GameObject a_button;
+
+    private void DetectControlSchemeNames()
+    {
+        _gamepadScheme = "Joystick";
+        _keyboardScheme = "Keyboard";
+
+        if (playerInputComponent?.actions == null) return;
+
+        bool hasJoystick = false, hasGamepad = false;
+        bool hasKeyboard = false, hasKeyboardArrows = false, hasKeyboardMouse = false;
+
+        foreach (var scheme in playerInputComponent.actions.controlSchemes)
+        {
+            switch (scheme.name)
+            {
+                case "Joystick":       hasJoystick = true; break;
+                case "Gamepad":        hasGamepad = true; break;
+                case "Keyboard":       hasKeyboard = true; break;
+                case "KeyboardArrows": hasKeyboardArrows = true; break;
+                case "Keyboard&Mouse": hasKeyboardMouse = true; break;
+            }
+        }
+
+        _gamepadScheme = hasJoystick ? "Joystick" : hasGamepad ? "Gamepad" : "Joystick";
+
+        int index = (controlSchemeIndex >= 0) ? controlSchemeIndex : 0;
+        if (hasKeyboard && hasKeyboardArrows)
+            _keyboardScheme = (index % 2 == 0) ? "Keyboard" : "KeyboardArrows";
+        else if (hasKeyboardMouse)
+            _keyboardScheme = "Keyboard&Mouse";
+        else if (hasKeyboard)
+            _keyboardScheme = "Keyboard";
+    }
+
+    private string GetKeyboardSchemeForIndex(int index)
+    {
+        if (playerInputComponent?.actions == null)
+            return (index % 2 == 0) ? "Keyboard" : "KeyboardArrows";
+
+        bool hasKeyboard = false, hasKeyboardArrows = false, hasKeyboardMouse = false;
+        foreach (var scheme in playerInputComponent.actions.controlSchemes)
+        {
+            switch (scheme.name)
+            {
+                case "Keyboard":       hasKeyboard = true; break;
+                case "KeyboardArrows": hasKeyboardArrows = true; break;
+                case "Keyboard&Mouse": hasKeyboardMouse = true; break;
+            }
+        }
+
+        if (hasKeyboard && hasKeyboardArrows)
+            return (index % 2 == 0) ? "Keyboard" : "KeyboardArrows";
+        if (hasKeyboardMouse)
+            return "Keyboard&Mouse";
+        if (hasKeyboard)
+            return "Keyboard";
+        return "Keyboard&Mouse";
+    }
+
+    private bool IsGamepadScheme(string scheme)
+    {
+        return scheme == "Joystick" || scheme == "Gamepad";
+    }
 
     private void OnEnable()
     {
@@ -135,6 +201,7 @@ public class playerController : MonoBehaviour
         gameManager = GameObject.FindFirstObjectByType<GameManager>();
 
         playerInputComponent = GetComponent<PlayerInput>();
+        DetectControlSchemeNames();
 
         //add yourself to the player list
         pInfo = GameObject.FindFirstObjectByType<playersInfo>(); // Get the players info component
@@ -198,7 +265,7 @@ public class playerController : MonoBehaviour
         pInfo.allControllers.Add(this);
 
         // Assign control scheme: prefer gamepad if one is available at this player's
-        // index, otherwise fall back to keyboard (WASD / Arrows).
+        // index, otherwise fall back to keyboard.
         // Set controlSchemeIndex in Inspector to 0-3 for each tank, or -1 to auto-assign from playerID.
         if (playerInputComponent != null)
         {
@@ -209,8 +276,8 @@ public class playerController : MonoBehaviour
                 var gamepad = Gamepad.all[index];
                 try
                 {
-                    playerInputComponent.SwitchCurrentControlScheme("Joystick", gamepad);
-                    if (debug) Debug.Log("Player " + playerID + " assigned to Gamepad " + index + " (" + gamepad.displayName + ")");
+                    playerInputComponent.SwitchCurrentControlScheme(_gamepadScheme, gamepad);
+                    if (debug) Debug.Log("Player " + playerID + " assigned to Gamepad " + index + " (" + gamepad.displayName + ") scheme=" + _gamepadScheme);
                 }
                 catch (Exception ex)
                 {
@@ -219,7 +286,7 @@ public class playerController : MonoBehaviour
             }
             else
             {
-                string scheme = (index % 2 == 0) ? "Keyboard" : "KeyboardArrows";
+                string scheme = GetKeyboardSchemeForIndex(index);
                 var keyboard = Keyboard.current;
                 try
                 {
@@ -286,7 +353,7 @@ public class playerController : MonoBehaviour
         int index = (controlSchemeIndex >= 0) ? controlSchemeIndex : playerID;
         string currentScheme = playerInputComponent.currentControlScheme;
 
-        if (currentScheme == "Joystick")
+        if (IsGamepadScheme(currentScheme))
         {
             var kb = Keyboard.current;
             if (kb == null) return;
@@ -297,7 +364,7 @@ public class playerController : MonoBehaviour
 
             if (keyboardActive)
             {
-                string scheme = (index % 2 == 0) ? "Keyboard" : "KeyboardArrows";
+                string scheme = GetKeyboardSchemeForIndex(index);
                 try
                 {
                     playerInputComponent.SwitchCurrentControlScheme(scheme, kb);
@@ -320,8 +387,8 @@ public class playerController : MonoBehaviour
                 {
                     try
                     {
-                        playerInputComponent.SwitchCurrentControlScheme("Joystick", gp);
-                        if (debug) Debug.Log("Player " + playerID + " switched to Joystick (Gamepad " + index + ")");
+                        playerInputComponent.SwitchCurrentControlScheme(_gamepadScheme, gp);
+                        if (debug) Debug.Log("Player " + playerID + " switched to " + _gamepadScheme + " (Gamepad " + index + ")");
                     }
                     catch (Exception) { }
                 }
