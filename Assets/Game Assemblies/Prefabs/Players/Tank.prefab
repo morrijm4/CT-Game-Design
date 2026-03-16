@@ -350,7 +350,7 @@ MonoBehaviour:
   playerSprite: {fileID: 8930264680089808671}
   spriteID: 0
   rotate: 1
-  playerSpeed: 1.5
+  playerSpeed: 0.5
   rb: {fileID: 2837374567193793473}
   pInfo: {fileID: 0}
   playerID: 0
