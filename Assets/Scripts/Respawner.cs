@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Respawner : MonoBehaviour
 {
     public float respawnDelay = 3f;
-    public float invulnerabilityTime = 2f;
+    public float invulnerabilityTime = 5f;
     public GameObject player;
     public Text display;
     private playerController playerController;

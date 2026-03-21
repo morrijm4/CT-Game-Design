@@ -351,6 +351,7 @@ MonoBehaviour:
   spriteID: 0
   rotate: 1
   playerSpeed: 0.5
+  rotationSpeed: 90
   rb: {fileID: 2837374567193793473}
   pInfo: {fileID: 0}
   playerID: 0
@@ -367,6 +368,7 @@ MonoBehaviour:
   listObjectsToInspect: []
   performingLabor: 0
   grabFilters: 08000000
+  disableGrabbing: 0
   useSnapTarget: 1
   snapRadius: 0.1
   snapAimBias: 0
@@ -617,6 +619,7 @@ MonoBehaviour:
   count: 0
   maxProjectiles: 20
   display: {fileID: 0}
+  shootCooldown: 0.25
   debug: 0
 --- !u!114 &8489113680148790352
 MonoBehaviour:
@@ -635,6 +638,7 @@ MonoBehaviour:
   count: 0
   maxProjectiles: 2
   display: {fileID: 0}
+  shootCooldown: 0.25
   debug: 0
 --- !u!114 &-8772897093640236220
 MonoBehaviour:

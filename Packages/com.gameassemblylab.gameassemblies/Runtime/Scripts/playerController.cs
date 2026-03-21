@@ -26,6 +26,7 @@ public class playerController : MonoBehaviour
 
     [Header("Speed / Motion")]
     public float playerSpeed = 1f;
+    [SerializeField] float rotationSpeed = 10f;
     public Rigidbody2D rb;
     private Vector2 movementInput = Vector2.zero;
 
@@ -605,13 +606,6 @@ public class playerController : MonoBehaviour
         calculateGrabPoint(movementInput);
 
         FlipCharacter(movementInput.x);
-
-        if (rotate && movementInput != Vector2.zero)
-        {
-            float angle = Mathf.Atan2(movementInput.y, movementInput.x) * Mathf.Rad2Deg;
-            angle -= 90f;
-            this.transform.rotation = Quaternion.Euler(0, 0, angle);
-        }
     }
     public void onFire(InputAction.CallbackContext context)
     {
@@ -759,7 +753,21 @@ public class playerController : MonoBehaviour
         {
             if (movementInput.x != 0 || movementInput.y != 0) createDust();
         }
+
+        if (rotate && movementInput != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(movementInput.y, movementInput.x) * Mathf.Rad2Deg - 90f;
+            Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+        }
+
         rb.linearVelocity = new Vector2(movementInput.x * playerSpeed, movementInput.y * playerSpeed);
+    }
+
+    private void OnValidate()
+    {
+        if (rotationSpeed < 0f)
+            rotationSpeed = 0f;
     }
     public void CreateObjects()
     {
