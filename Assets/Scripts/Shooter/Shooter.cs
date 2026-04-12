@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif // UNITY_EDITOR
+
 public class Shooter : MonoBehaviour
 {
     public CircleCollider2D projectile;
@@ -13,6 +17,28 @@ public class Shooter : MonoBehaviour
 
     public bool debug = false;
     private float nextShootTime = 0f;
+
+#if UNITY_EDITOR
+    void OnEnable()
+    {
+        EditorApplication.pauseStateChanged += OnPauseStateChanged;
+    }
+
+    void OnDisable()
+    {
+        EditorApplication.pauseStateChanged -= OnPauseStateChanged;
+    }
+
+    void OnPauseStateChanged(PauseState state)
+    {
+        UpdateDisplay();
+    }
+#endif // UNITY_EDITOR
+
+    void Start()
+    {
+        UpdateDisplay();
+    }
 
     public void Shoot()
     {
@@ -62,8 +88,7 @@ public class Shooter : MonoBehaviour
 
     void UpdateDisplay()
     {
-        if (!display) return;
-        display.text = "x " + GetCount().ToString();
+        if (display) display.text = GetCount().ToString();
     }
 
     void OnValidate()
