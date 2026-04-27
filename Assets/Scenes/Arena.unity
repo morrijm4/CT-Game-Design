@@ -1019,6 +1019,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -5691699385362627107, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5691699385362627107, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
       propertyPath: display
       value: 
       objectReference: {fileID: 812006655}
@@ -1028,7 +1032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4457017265061775434, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
       propertyPath: health
-      value: 20
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4457017265061775434, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
       propertyPath: display
@@ -1608,6 +1612,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -5691699385362627107, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5691699385362627107, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
       propertyPath: display
       value: 
       objectReference: {fileID: 647260443}
@@ -1617,7 +1625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4457017265061775434, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
       propertyPath: health
-      value: 20
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4457017265061775434, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
       propertyPath: display
@@ -5354,7 +5362,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 642987ec5137cc24b8fc70395c33cf99, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -7425,6 +7433,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -5691699385362627107, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5691699385362627107, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
       propertyPath: display
       value: 
       objectReference: {fileID: 99003880}
@@ -7434,7 +7446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4457017265061775434, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
       propertyPath: health
-      value: 20
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4457017265061775434, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
       propertyPath: display
@@ -7581,6 +7593,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -5691699385362627107, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5691699385362627107, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
       propertyPath: display
       value: 
       objectReference: {fileID: 734537487}
@@ -7590,7 +7606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4457017265061775434, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
       propertyPath: health
-      value: 20
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4457017265061775434, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
       propertyPath: display

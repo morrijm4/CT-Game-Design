@@ -728,6 +728,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   obj: {fileID: 3308519254579872422}
+  explosion: {fileID: 100006, guid: 2e7e92bc7175b744ea40878dedfa79e4, type: 3}
+  explosionSound: {fileID: 8300000, guid: 3e93d8889c2dd1a43a490dc51a6ffa23, type: 3}
+  display: {fileID: 0}
   health: 20
 --- !u!1 &4308293142968107062
 GameObject:

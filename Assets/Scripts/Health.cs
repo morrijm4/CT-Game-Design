@@ -8,6 +8,8 @@ using UnityEditor;
 public class Health : MonoBehaviour
 {
     public GameObject obj;
+    public GameObject explosion;
+    public AudioClip explosionSound;
     public Text display;
     public int health = 20;
 
@@ -24,16 +26,17 @@ public class Health : MonoBehaviour
     public void OnHit(Collider2D collider)
     {
         if (!collider.CompareTag("Pellet")) return;
-
         if (health > 0) health--;
-
-        if (health == 0 && obj != null)
-        {
-            Destroy(obj);
-            obj = null;
-        }
-
+        if (health == 0 && obj != null) Die();
         UpdateDisplay();
+    }
+
+    public void Die()
+    {
+        Destroy(obj);
+        obj = null;
+        if (explosion) Instantiate(explosion, transform.position, Quaternion.identity);
+        if (explosionSound) AudioSource.PlayClipAtPoint(explosionSound, transform.position, 1f);
     }
 
     void UpdateDisplay()
