@@ -1,1 +1,1 @@
-public class PelletShooter : Shooter { }
+class PelletShooter : Shooter { }
