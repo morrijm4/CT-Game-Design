@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1dbc518224e49f34095aab42fe05751a
+guid: 2e7e92bc7175b744ea40878dedfa79e4
 labels:
 - warfx
 - particles
@@ -10,5 +10,5 @@ AssetOrigin:
   productId: 5669
   packageName: War FX
   packageVersion: 1.8.04
-  assetPath: Assets/JMO Assets/WarFX/_Effects/Explosions/WFX_ExplosiveSmoke Big.prefab
+  assetPath: Assets/JMO Assets/WarFX/_Effects/Explosions/WFX_ExplosiveSmoke Small.prefab
   uploadId: 301034
