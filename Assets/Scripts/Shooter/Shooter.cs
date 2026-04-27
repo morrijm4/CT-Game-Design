@@ -52,6 +52,11 @@ public class Shooter : MonoBehaviour
         if (debug) Debug.Log("Projectile shot. " + count + " left.");
     }
 
+    public void Add(int amount)
+    {
+        SetCount(GetCount() + amount);
+    }
+
     public int Increment()
     {
         return SetCount(GetCount() + 1);
