@@ -1,5 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using System.Collections;
+using UnityEngine.InputSystem;
+
+
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -8,10 +14,16 @@ using UnityEditor;
 public class Health : MonoBehaviour
 {
     public GameObject obj;
+
+    public PlayerInput input;
+    public Respawner respawner;
     public GameObject explosion;
     public AudioClip explosionSound;
     public Text display;
-    public int health = 20;
+    public int startingHealth = 1;
+    public int lives = 3;
+    private int health;
+
 
     void OnValidate()
     {
@@ -20,28 +32,38 @@ public class Health : MonoBehaviour
 
     void Start()
     {
+        health = startingHealth;
         UpdateDisplay();
+        respawner.AddSpwawnPosition(transform.position);
     }
 
     public void OnHit(Collider2D collider)
     {
         if (!collider.CompareTag("Pellet")) return;
         if (health > 0) health--;
-        if (health == 0 && obj != null) Die();
-        UpdateDisplay();
+
+        if (health == 0 && obj != null)
+        {
+            Die();
+        }
+
     }
 
     public void Die()
     {
-        Destroy(obj);
-        obj = null;
+        obj.SetActive(false);
+        input.DeactivateInput();
+        lives--;
+
         if (explosion) Instantiate(explosion, transform.position, Quaternion.identity);
         if (explosionSound) AudioSource.PlayClipAtPoint(explosionSound, transform.position, 1f);
+
+        UpdateDisplay();
     }
 
     void UpdateDisplay()
     {
-        if (display) display.text = health.ToString();
+        if (display) display.text = lives.ToString();
     }
 
 #if UNITY_EDITOR

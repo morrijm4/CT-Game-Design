@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using System.Collections;
 using System.Linq;
+using UnityEngine.InputSystem.Users;
 
 public class playerController : MonoBehaviour
 {
@@ -111,17 +112,8 @@ public class playerController : MonoBehaviour
             // Initialize based on current state
             HandleGameStateChanged(GameManager.Instance.CurrentState);
         }
-        else
-        {
-            // If no GameManager, ensure PlayerInput is set to Player action map
-            if (playerInputComponent == null) playerInputComponent = GetComponent<PlayerInput>();
-            if (playerInputComponent != null)
-            {
-                playerInputComponent.SwitchCurrentActionMap("Player");
-                if (debug) Debug.Log("No GameManager found. Setting PlayerInput to 'Player' action map.");
-            }
-        }
     }
+
 
     private void Start()
     {
@@ -129,7 +121,6 @@ public class playerController : MonoBehaviour
         cManager = GameObject.FindFirstObjectByType<creationManager>(); // Get the creation manager component
         gameManager = GameObject.FindFirstObjectByType<GameManager>();
 
-        playerInputComponent = GetComponent<PlayerInput>();
         //add yourself to the player list
         pInfo = GameObject.FindFirstObjectByType<playersInfo>(); // Get the players info component
         playerID = pInfo.allPlayers.Count; // Set the player ID to the current number of players

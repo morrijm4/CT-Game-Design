@@ -1,81 +1,33 @@
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
+using NUnit.Framework;
 
 public class Respawner : MonoBehaviour
 {
-    public float respawnDelay = 3f;
-    public float invulnerabilityTime = 5f;
-    public GameObject player;
-    public Text display;
-    private playerController playerController;
-    private Shooter[] shooters;
-    private SpriteRenderer[] renderers;
-    private Collider2D[] colliders;
-    private ParticleSystem[] particleSystems;
-    private int count = 0;
+    public List<GameObject> tanks;
+    private List<Vector3> positions = new List<Vector3>();
 
-    private Vector3 spawnPosition;
-    private bool isInvulnerable = false;
-
-    void Awake()
+    public void AddSpwawnPosition(Vector3 position)
     {
-        playerController = player.GetComponent<playerController>();
-        shooters = player.GetComponentsInParent<Shooter>();
-        renderers = player.GetComponentsInChildren<SpriteRenderer>();
-        colliders = player.GetComponentsInChildren<Collider2D>();
-        particleSystems = player.GetComponentsInChildren<ParticleSystem>();
+        positions.Add(position);
     }
 
-    void Start()
+    public void RespawnTanks()
     {
-        this.spawnPosition = this.player.transform.position;
-    }
-
-    public void Die(Collider2D other)
-    {
-        if (!other.CompareTag("Pellet") || this.isInvulnerable) return;
-
-        StartCoroutine(RespawnRoutine());
-
-        if (playerController.isCarryingObject) playerController.GrabDrop();
-
-        foreach (var shooter in shooters)
+        ShufflePositions();
+        for (int i = 0; i < tanks.Count && i < positions.Count; i++)
         {
-            shooter.SetCount(0);
-        }
-
-        count++;
-        if (display) display.text = "x " + count.ToString();
-    }
-
-    void SetTankActive(bool enabled)
-    {
-        playerController.disableGrabbing = !enabled;
-        foreach (var renderer in renderers)
-        {
-            renderer.enabled = enabled;
-        }
-        foreach (var collider in colliders)
-        {
-            collider.enabled = enabled;
-        }
-        foreach (var system in particleSystems)
-        {
-            system.gameObject.SetActive(enabled);
+            tanks[i].transform.position = positions[i];
         }
     }
 
-    IEnumerator RespawnRoutine()
+    void ShufflePositions()
     {
-        this.isInvulnerable = true;
-        SetTankActive(false);
-
-        yield return new WaitForSeconds(this.respawnDelay);
-        player.transform.position = this.spawnPosition;
-        SetTankActive(true);
-
-        yield return new WaitForSeconds(this.invulnerabilityTime);
-        this.isInvulnerable = false;
+        for (int i = positions.Count - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1);
+            (positions[i], positions[j]) = (positions[j], positions[i]);
+        }
     }
 }
