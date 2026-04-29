@@ -14,8 +14,11 @@ using UnityEditor;
 public class Health : MonoBehaviour
 {
     public GameObject obj;
+
     public PlayerInput input;
     public Respawner respawner;
+    public GameObject explosion;
+    public AudioClip explosionSound;
     public Text display;
     public int startingHealth = 1;
     public int lives = 3;
@@ -37,7 +40,6 @@ public class Health : MonoBehaviour
     public void OnHit(Collider2D collider)
     {
         if (!collider.CompareTag("Pellet")) return;
-
         if (health > 0) health--;
 
         if (health == 0 && obj != null)
@@ -52,6 +54,10 @@ public class Health : MonoBehaviour
         obj.SetActive(false);
         input.DeactivateInput();
         lives--;
+
+        if (explosion) Instantiate(explosion, transform.position, Quaternion.identity);
+        if (explosionSound) AudioSource.PlayClipAtPoint(explosionSound, transform.position, 1f);
+
         UpdateDisplay();
     }
 
