@@ -2830,6 +2830,7 @@ MonoBehaviour:
     input: {fileID: 1267931365}
   totalPlayers: 4
   ceasefireCooldown: 5
+  countdown: {fileID: 719042131}
 --- !u!1 &599603747
 GameObject:
   m_ObjectHideFlags: 0
@@ -3431,7 +3432,7 @@ GameObject:
   - component: {fileID: 719042132}
   - component: {fileID: 719042131}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Ceasefire Cooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3478,15 +3479,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Ceasefire in 30
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1df8cab18acab7c4b82e174208bdead8, type: 2}
+  m_sharedMaterial: {fileID: 7090169064679573945, guid: 1df8cab18acab7c4b82e174208bdead8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278215935
+  m_fontColor: {r: 1, g: 0.39215687, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
