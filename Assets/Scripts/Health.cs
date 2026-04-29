@@ -1,5 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using System.Collections;
+using UnityEngine.InputSystem;
+
+
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -8,8 +14,13 @@ using UnityEditor;
 public class Health : MonoBehaviour
 {
     public GameObject obj;
+    public PlayerInput input;
+    public Respawner respawner;
     public Text display;
-    public int health = 20;
+    public int startingHealth = 1;
+    public int lives = 3;
+    private int health;
+
 
     void OnValidate()
     {
@@ -18,7 +29,9 @@ public class Health : MonoBehaviour
 
     void Start()
     {
+        health = startingHealth;
         UpdateDisplay();
+        respawner.AddSpwawnPosition(transform.position);
     }
 
     public void OnHit(Collider2D collider)
@@ -29,16 +42,22 @@ public class Health : MonoBehaviour
 
         if (health == 0 && obj != null)
         {
-            Destroy(obj);
-            obj = null;
+            Die();
         }
 
+    }
+
+    public void Die()
+    {
+        obj.SetActive(false);
+        input.DeactivateInput();
+        lives--;
         UpdateDisplay();
     }
 
     void UpdateDisplay()
     {
-        if (display) display.text = health.ToString();
+        if (display) display.text = lives.ToString();
     }
 
 #if UNITY_EDITOR

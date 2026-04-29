@@ -30,7 +30,9 @@ public class CeasefireManager : MonoBehaviour
 
     [Header("Score Display")]
     public TextMeshProUGUI leftScore;
+    public TextMeshProUGUI leftTanksRemain;
     public TextMeshProUGUI rightScore;
+    public TextMeshProUGUI rightTanksRemain;
 
     [Header("Colors")]
     public Color neutralColor = Color.green;
@@ -38,8 +40,7 @@ public class CeasefireManager : MonoBehaviour
     public Color redColor = Color.red;
 
     [Header("Tanks")]
-    public List<GameObject> tanks;
-    public List<SpriteRenderer> renderers;
+    public List<TankData> tanks;
 
     public static CeasefireManager Instance { get; private set; }
 
@@ -59,6 +60,7 @@ public class CeasefireManager : MonoBehaviour
 
     void OnEnable()
     {
+        RemoveDeadTanks();
         GeneratePairs();
         ShufflePairs();
         ResetGame();
@@ -83,8 +85,8 @@ public class CeasefireManager : MonoBehaviour
 
     void ReadInput()
     {
-        int lhs = _pairs[0].Item1;
-        int rhs = _pairs[0].Item2;
+        int lhs = GetLHS();
+        int rhs = GetRHS();
 
         if (Gamepad.all.Count > lhs && leftPlayerChoice == Choice.None)
         {
@@ -154,8 +156,8 @@ public class CeasefireManager : MonoBehaviour
             message = "WAR!\nBoth players attack.";
         }
 
-        tanks[lhs()].GetComponent<PelletShooter>().Add(lhsScore);
-        tanks[rhs()].GetComponent<PelletShooter>().Add(rhsScore);
+        tanks[GetLHS()].shooter.Add(lhsScore); 
+        tanks[GetRHS()].shooter.Add(rhsScore);
 
         // Display scores on panels
         UpdateScores();
@@ -177,12 +179,12 @@ public class CeasefireManager : MonoBehaviour
         }
     }
 
-    int lhs()
+    int GetLHS()
     {
         return _pairs[0].Item1;
     }
 
-    int rhs()
+    int GetRHS()
     {
         return _pairs[0].Item2;
     }
@@ -201,13 +203,13 @@ public class CeasefireManager : MonoBehaviour
 
         // resultBanner.SetActive(false);
 
-        int lhs = _pairs[0].Item1;
-        int rhs = _pairs[0].Item2;
+        int lhs = GetLHS();
+        int rhs = GetRHS();
 
         Debug.Log($"Starting new round: Tank {lhs} vs Tank {rhs}");
 
-        Color lhsColor = renderers[lhs].color;
-        Color rhsColor = renderers[rhs].color;
+        Color lhsColor = tanks[lhs].renderer.color;
+        Color rhsColor = tanks[rhs].renderer.color;
         
         leftTankImage.color = lhsColor;
         rightTankImage.color = rhsColor;
@@ -215,15 +217,23 @@ public class CeasefireManager : MonoBehaviour
         leftBomb.color = lhsColor;
         rightBomb.color = rhsColor;
 
+        leftTanksRemain.text = tanks[lhs].health.lives.ToString();
+        rightTanksRemain.text = tanks[rhs].health.lives.ToString();
+
         UpdateScores();
     }
 
     void UpdateScores()
     {
-        int lhs = _pairs[0].Item1;
-        int rhs = _pairs[0].Item2;
-        if (leftScore != null) leftScore.text = tanks[lhs].GetComponent<PelletShooter>().GetCount().ToString();
-        if (rightScore != null) rightScore.text = tanks[rhs].GetComponent<PelletShooter>().GetCount().ToString();
+        int lhs = GetLHS();
+        int rhs = GetRHS();
+        if (leftScore != null) leftScore.text = tanks[lhs].shooter.GetCount().ToString();
+        if (rightScore != null) rightScore.text = tanks[rhs].shooter.GetCount().ToString();
+    }
+
+    void RemoveDeadTanks()
+    {
+        tanks.RemoveAll(t => t.health.lives <= 0);
     }
 
     void GeneratePairs()
@@ -258,4 +268,13 @@ public class CeasefireManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         ceasefireController.EndCeaseFire();
     }
+}
+
+
+[System.Serializable]
+public class TankData
+{
+    public PelletShooter shooter;
+    public Health health;
+    public SpriteRenderer renderer;
 }
