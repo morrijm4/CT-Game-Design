@@ -42,6 +42,8 @@ public class CeasefireManager : MonoBehaviour
     [Header("Tanks")]
     public List<TankData> tanks;
 
+    public bool debug = false;
+
     public static CeasefireManager Instance { get; private set; }
 
     enum Choice { None, Cooperate, Attack }
@@ -75,7 +77,7 @@ public class CeasefireManager : MonoBehaviour
         timeLeft -= Time.deltaTime;
         UpdateTimerDisplay();
 
-        if (timeLeft <= 0)
+        if (timeLeft <= 0 || (leftPlayerChoice != Choice.None && rightPlayerChoice != Choice.None))
         {
             timeLeft = 0;
             UpdateTimerDisplay();
@@ -103,6 +105,8 @@ public class CeasefireManager : MonoBehaviour
             else if (Gamepad.all[rhs].buttonEast.wasPressedThisFrame)
                 rightPlayerChoice = Choice.Attack;     // B button
         }
+
+        if (debug) Debug.Log($"P1 Choice: {leftPlayerChoice} | P2 Choice: {rightPlayerChoice}");
     }
 
     void UpdateTimerDisplay()
@@ -120,6 +124,8 @@ public class CeasefireManager : MonoBehaviour
         // Default to cooperate if no input was made
         if (leftPlayerChoice == Choice.None) leftPlayerChoice = Choice.Cooperate;
         if (rightPlayerChoice == Choice.None) rightPlayerChoice = Choice.Cooperate;
+
+        if (debug) Debug.Log($"Final Choices - P1: {leftPlayerChoice}, P2: {rightPlayerChoice}");
 
         // Apply panel colors
         leftPanel.color = leftPlayerChoice == Choice.Cooperate ? greenColor : redColor;
@@ -166,7 +172,7 @@ public class CeasefireManager : MonoBehaviour
         // resultBanner.SetActive(true);
         // resultText.text = message;
 
-        Debug.Log("P1 Score: " + lhsScore + " | P2 Score: " + rhsScore);
+        if (debug) Debug.Log("P1 Score: " + lhsScore + " | P2 Score: " + rhsScore);
 
         _pairs.RemoveAt(0);
 
@@ -206,7 +212,7 @@ public class CeasefireManager : MonoBehaviour
         int lhs = GetLHS();
         int rhs = GetRHS();
 
-        Debug.Log($"Starting new round: Tank {lhs} vs Tank {rhs}");
+        if (debug) Debug.Log($"Starting new round: Tank {lhs} vs Tank {rhs}");
 
         Color lhsColor = tanks[lhs].renderer.color;
         Color rhsColor = tanks[rhs].renderer.color;
