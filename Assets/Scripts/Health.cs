@@ -12,6 +12,7 @@ using UnityEditor;
 public class Health : MonoBehaviour
 {
     public GameObject obj;
+    public GameObject turret;
 
     public PlayerInput input;
     public Respawner respawner;
@@ -32,7 +33,12 @@ public class Health : MonoBehaviour
     {
         health = startingHealth;
         UpdateDisplay();
-        respawner.AddSpwawnPosition(transform.position);
+
+        respawner.AddSpwawnPosition(new StartPosition { 
+            entityPosition = obj.transform.position,
+            entityRotation = obj.transform.rotation,
+            turretRotation = turret.transform.rotation
+        });
     }
 
     public void OnHit(Collider2D collider)

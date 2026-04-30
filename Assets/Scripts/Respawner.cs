@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.UI;
-using NUnit.Framework;
+using Unity.VisualScripting;
 
 public class Respawner : MonoBehaviour
 {
-    public List<GameObject> tanks;
-    private List<Vector3> positions = new List<Vector3>();
+    public List<Position> tanks;
+    public Transform initialTurret;
+    private List<StartPosition> positions = new List<StartPosition>();
 
-    public void AddSpwawnPosition(Vector3 position)
+    public void AddSpwawnPosition(StartPosition position)
     {
         positions.Add(position);
     }
@@ -18,7 +18,9 @@ public class Respawner : MonoBehaviour
         ShufflePositions();
         for (int i = 0; i < tanks.Count && i < positions.Count; i++)
         {
-            tanks[i].transform.position = positions[i];
+            tanks[i].entity.transform.position = positions[i].entityPosition;
+            tanks[i].entity.transform.rotation = positions[i].entityRotation;
+            tanks[i].turret.transform.rotation = positions[i].turretRotation;
         }
     }
 
@@ -30,4 +32,19 @@ public class Respawner : MonoBehaviour
             (positions[i], positions[j]) = (positions[j], positions[i]);
         }
     }
+}
+
+[System.Serializable]
+public class Position
+{
+    public GameObject entity;
+    public GameObject turret;
+}
+
+[System.Serializable]
+public class StartPosition
+{
+    public Vector3 entityPosition;
+    public Quaternion entityRotation;
+    public Quaternion turretRotation;
 }
