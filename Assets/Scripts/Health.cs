@@ -55,8 +55,8 @@ public class Health : MonoBehaviour
         input.DeactivateInput();
         lives--;
 
-        if (explosion) Instantiate(explosion, transform.position, Quaternion.identity);
-        if (explosionSound) AudioSource.PlayClipAtPoint(explosionSound, transform.position, 1f);
+        if (explosion) Instantiate(explosion, obj.transform.position, Quaternion.identity);
+        if (explosionSound) AudioSource.PlayClipAtPoint(explosionSound, obj.transform.position, 1f);
 
         UpdateDisplay();
     }
