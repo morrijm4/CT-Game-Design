@@ -673,13 +673,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   obj: {fileID: 8219688754123729687}
+  turret: {fileID: 0}
   input: {fileID: 6455653805371221810}
   respawner: {fileID: 0}
   explosion: {fileID: 100006, guid: 2e7e92bc7175b744ea40878dedfa79e4, type: 3}
   explosionSound: {fileID: 8300000, guid: d4aee29185389894b9cc0d8873904a49, type: 3}
   display: {fileID: 0}
   startingHealth: 1
-  lives: 2
+  lives: 3
 --- !u!1 &7405483986899148852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1282,7 +1283,7 @@ MonoBehaviour:
   projectile: {fileID: 1375569915086783828, guid: a3aab3b7370134335aba1c40f928914c, type: 3}
   muzzle: {fileID: 2369809150426497948}
   turret: {fileID: 3942385375942203340}
-  count: 1
+  count: 3
   maxProjectiles: 200000000
   display: {fileID: 0}
   shootCooldown: 0.25

@@ -62,7 +62,6 @@ public class CeasefireManager : MonoBehaviour
 
     void OnEnable()
     {
-        RemoveDeadTanks();
         GeneratePairs();
         ShufflePairs();
         ResetGame();
@@ -104,9 +103,10 @@ public class CeasefireManager : MonoBehaviour
                 rightPlayerChoice = Choice.Cooperate;  // X button
             else if (Gamepad.all[rhs].buttonEast.wasPressedThisFrame)
                 rightPlayerChoice = Choice.Attack;     // B button
+            Debug.Log($"P2 Input Detected: {Gamepad.all[rhs].buttonWest.wasPressedThisFrame} | {Gamepad.all[rhs].buttonEast.wasPressedThisFrame}");
         }
 
-        if (debug) Debug.Log($"P1 Choice: {leftPlayerChoice} | P2 Choice: {rightPlayerChoice}");
+        if (debug) Debug.Log($"P1 {GetLHS()} Choice: {leftPlayerChoice} | P2 {GetRHS()} Choice: {rightPlayerChoice}");
     }
 
     void UpdateTimerDisplay()
@@ -237,11 +237,6 @@ public class CeasefireManager : MonoBehaviour
         if (rightScore != null) rightScore.text = tanks[rhs].shooter.GetCount().ToString();
     }
 
-    void RemoveDeadTanks()
-    {
-        tanks.RemoveAll(t => t.health.lives <= 0);
-    }
-
     void GeneratePairs()
     {
         _pairs.Clear();
@@ -249,7 +244,7 @@ public class CeasefireManager : MonoBehaviour
         {
             for (int j = i + 1; j < tanks.Count; j++)
             {
-                _pairs.Add((i, j));
+                if (tanks[i].health.lives > 0 && tanks[j].health.lives > 0) _pairs.Add((i, j));
             }
         }
     }
