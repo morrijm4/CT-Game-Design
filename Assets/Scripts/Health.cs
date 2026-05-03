@@ -34,16 +34,17 @@ public class Health : MonoBehaviour
         health = startingHealth;
         UpdateDisplay();
 
-        respawner.AddSpwawnPosition(new StartPosition { 
+        respawner.AddSpwawnPosition(new StartPosition
+        {
             entityPosition = obj.transform.position,
             entityRotation = obj.transform.rotation,
             turretRotation = turret.transform.rotation
         });
     }
 
-    public void OnHit(Collider2D collider)
+    public void OnCollisionEnter2D(Collision2D other)
     {
-        if (!collider.CompareTag("Pellet")) return;
+        if (!other.collider.CompareTag("Pellet")) return;
         if (health > 0) health--;
 
         if (health == 0 && obj != null)

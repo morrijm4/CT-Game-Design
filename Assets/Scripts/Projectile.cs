@@ -4,6 +4,9 @@ public class Projectile : MonoBehaviour
 {
     public float speed = 0.5f;
     public bool debug = false;
+    public int maxBounces = 1;
+    public GameObject explosion;
+    private int bounceCount = 0;
     private Rigidbody2D rb;
 
     void Awake()
@@ -16,10 +19,20 @@ public class Projectile : MonoBehaviour
         this.rb.linearVelocity = transform.up * this.speed * -1;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.CompareTag("ConsumeArea")) return;
-        Destroy(gameObject);
-        if (debug) Debug.Log("Bullet Destroyed");
+        if (debug) Debug.Log("Bullet Collision" + other.collider.tag);
+        if (other.collider.CompareTag("ConsumeArea")) return;
+
+        if (bounceCount++ >= maxBounces || other.collider.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+            if (explosion) Instantiate(explosion, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Vector2 normal = other.contacts[0].normal;
+            rb.linearVelocity = Vector2.Reflect(rb.linearVelocity, normal);
+        }
     }
 }
