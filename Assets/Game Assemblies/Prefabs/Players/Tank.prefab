@@ -150,11 +150,11 @@ GameObject:
   - component: {fileID: 2907523559060360053}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7733675218969583685
 Transform:
   m_ObjectHideFlags: 0
@@ -231,7 +231,7 @@ MonoBehaviour:
   OnEntry:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6881538536759051420}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Health, Assembly-CSharp
         m_MethodName: OnHit
         m_Mode: 0
@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 3668420234083380571}
   m_Layer: 0
   m_Name: GrabArea
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -637,14 +637,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1540033120969432413}
-  - component: {fileID: 6881538536759051420}
   m_Layer: 0
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1540033120969432413
 Transform:
   m_ObjectHideFlags: 0
@@ -660,27 +659,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 9210867847299695679}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6881538536759051420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7291133698055848202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56a9990c7601b4f948daa6fc081ea2e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Health
-  obj: {fileID: 8219688754123729687}
-  turret: {fileID: 0}
-  input: {fileID: 6455653805371221810}
-  respawner: {fileID: 0}
-  explosion: {fileID: 100006, guid: 2e7e92bc7175b744ea40878dedfa79e4, type: 3}
-  explosionSound: {fileID: 8300000, guid: d4aee29185389894b9cc0d8873904a49, type: 3}
-  display: {fileID: 0}
-  startingHealth: 1
-  lives: 3
 --- !u!1 &7405483986899148852
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,7 +703,7 @@ GameObject:
   - component: {fileID: 7606274083359611781}
   m_Layer: 0
   m_Name: ConsumeArea
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -998,9 +976,10 @@ GameObject:
   - component: {fileID: 1169814625079402408}
   - component: {fileID: 7174043681954952347}
   - component: {fileID: 6238495606268906975}
+  - component: {fileID: 2997165246291271281}
   m_Layer: 0
   m_Name: Entity
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1089,7 +1068,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0009992123, y: -0.092928946}
+  m_Offset: {x: -0.0010407865, y: -0.092928946}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1099,7 +1078,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.43842906, y: 0.8141421}
+  m_Size: {x: 0.4385122, y: 0.8141421}
   m_EdgeRadius: 0
 --- !u!114 &1169814625079402408
 MonoBehaviour:
@@ -1236,6 +1215,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 02000000
+--- !u!114 &2997165246291271281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8219688754123729687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a9990c7601b4f948daa6fc081ea2e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  obj: {fileID: 8219688754123729687}
+  turret: {fileID: 0}
+  input: {fileID: 6455653805371221810}
+  respawner: {fileID: 0}
+  explosion: {fileID: 100006, guid: 2e7e92bc7175b744ea40878dedfa79e4, type: 3}
+  explosionSound: {fileID: 8300000, guid: d4aee29185389894b9cc0d8873904a49, type: 3}
+  display: {fileID: 0}
+  startingHealth: 1
+  lives: 3
 --- !u!1 &8910973081627125163
 GameObject:
   m_ObjectHideFlags: 0

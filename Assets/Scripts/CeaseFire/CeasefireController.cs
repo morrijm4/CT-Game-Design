@@ -25,6 +25,14 @@ public class CeasefireController : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        foreach (var tank in tanks)
+        {
+            tank.health = tank.entity.GetComponent<Health>();
+        }
+    }
+
     private void Start()
     {
         StartCooldown();
@@ -43,8 +51,10 @@ public class CeasefireController : MonoBehaviour
         if (ceasefireUI.activeSelf) return;
 
         int livePlayers = 0;
+        int activePlayers = 0;
         for (int playerId = 0; playerId < totalPlayers; playerId++)
         {
+            if (tanks[playerId].entity.activeSelf) activePlayers++;
             if (tanks[playerId].health.lives <= 0) continue;
 
             if (Gamepad.all.Count > playerId && Gamepad.all[playerId].buttonNorth.wasPressedThisFrame)
@@ -58,6 +68,10 @@ public class CeasefireController : MonoBehaviour
         if (gameOverUI != null && livePlayers <= 1)
         {
             gameOverUI.SetActive(true);
+        }
+        else if (activePlayers <= 1)
+        {
+            BeginCeasefire();
         }
     }
 
