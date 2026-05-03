@@ -2155,7 +2155,7 @@ MonoBehaviour:
   - {fileID: 368807414}
   - {fileID: 1405784161}
   - {fileID: 1399016383}
-  secondsPerPanel: 2
+  secondsPerPanel: 3
 --- !u!4 &1805141719
 Transform:
   m_ObjectHideFlags: 0
