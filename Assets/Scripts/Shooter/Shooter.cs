@@ -9,6 +9,7 @@ public class Shooter : MonoBehaviour
 {
     public CircleCollider2D projectile;
     public Transform muzzle;
+    public Transform turret;
     public int count = 0;
     public int maxProjectiles = 0;
     public Text display;
@@ -45,8 +46,8 @@ public class Shooter : MonoBehaviour
         if (count <= 0) return;
         if (Time.time < nextShootTime) return;
 
-        Vector3 offset = muzzle.rotation * Vector3.forward * projectile.radius;
-        Instantiate(projectile, muzzle.position + offset, muzzle.rotation);
+        Vector3 offset = turret.rotation * Vector3.forward * projectile.radius;
+        Instantiate(projectile, muzzle.position + offset, turret.rotation);
         nextShootTime = Time.time + shootCooldown;
         Decrement();
         if (debug) Debug.Log("Projectile shot. " + count + " left.");

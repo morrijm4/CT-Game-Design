@@ -42,6 +42,8 @@ public class CeasefireManager : MonoBehaviour
     [Header("Tanks")]
     public List<TankData> tanks;
 
+    public bool debug = false;
+
     public static CeasefireManager Instance { get; private set; }
 
     enum Choice { None, Cooperate, Attack }
@@ -60,7 +62,6 @@ public class CeasefireManager : MonoBehaviour
 
     void OnEnable()
     {
-        RemoveDeadTanks();
         GeneratePairs();
         ShufflePairs();
         ResetGame();
@@ -75,7 +76,7 @@ public class CeasefireManager : MonoBehaviour
         timeLeft -= Time.deltaTime;
         UpdateTimerDisplay();
 
-        if (timeLeft <= 0)
+        if (timeLeft <= 0 || (leftPlayerChoice != Choice.None && rightPlayerChoice != Choice.None))
         {
             timeLeft = 0;
             UpdateTimerDisplay();
@@ -102,7 +103,10 @@ public class CeasefireManager : MonoBehaviour
                 rightPlayerChoice = Choice.Cooperate;  // X button
             else if (Gamepad.all[rhs].buttonEast.wasPressedThisFrame)
                 rightPlayerChoice = Choice.Attack;     // B button
+            Debug.Log($"P2 Input Detected: {Gamepad.all[rhs].buttonWest.wasPressedThisFrame} | {Gamepad.all[rhs].buttonEast.wasPressedThisFrame}");
         }
+
+        if (debug) Debug.Log($"P1 {GetLHS()} Choice: {leftPlayerChoice} | P2 {GetRHS()} Choice: {rightPlayerChoice}");
     }
 
     void UpdateTimerDisplay()
@@ -120,6 +124,8 @@ public class CeasefireManager : MonoBehaviour
         // Default to cooperate if no input was made
         if (leftPlayerChoice == Choice.None) leftPlayerChoice = Choice.Cooperate;
         if (rightPlayerChoice == Choice.None) rightPlayerChoice = Choice.Cooperate;
+
+        if (debug) Debug.Log($"Final Choices - P1: {leftPlayerChoice}, P2: {rightPlayerChoice}");
 
         // Apply panel colors
         leftPanel.color = leftPlayerChoice == Choice.Cooperate ? greenColor : redColor;
@@ -166,7 +172,7 @@ public class CeasefireManager : MonoBehaviour
         // resultBanner.SetActive(true);
         // resultText.text = message;
 
-        Debug.Log("P1 Score: " + lhsScore + " | P2 Score: " + rhsScore);
+        if (debug) Debug.Log("P1 Score: " + lhsScore + " | P2 Score: " + rhsScore);
 
         _pairs.RemoveAt(0);
 
@@ -206,7 +212,7 @@ public class CeasefireManager : MonoBehaviour
         int lhs = GetLHS();
         int rhs = GetRHS();
 
-        Debug.Log($"Starting new round: Tank {lhs} vs Tank {rhs}");
+        if (debug) Debug.Log($"Starting new round: Tank {lhs} vs Tank {rhs}");
 
         Color lhsColor = tanks[lhs].renderer.color;
         Color rhsColor = tanks[rhs].renderer.color;
@@ -231,11 +237,6 @@ public class CeasefireManager : MonoBehaviour
         if (rightScore != null) rightScore.text = tanks[rhs].shooter.GetCount().ToString();
     }
 
-    void RemoveDeadTanks()
-    {
-        tanks.RemoveAll(t => t.health.lives <= 0);
-    }
-
     void GeneratePairs()
     {
         _pairs.Clear();
@@ -243,7 +244,7 @@ public class CeasefireManager : MonoBehaviour
         {
             for (int j = i + 1; j < tanks.Count; j++)
             {
-                _pairs.Add((i, j));
+                if (tanks[i].health.lives > 0 && tanks[j].health.lives > 0) _pairs.Add((i, j));
             }
         }
     }

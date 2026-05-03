@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
-        this.rb.linearVelocity = transform.up * this.speed;
+        this.rb.linearVelocity = transform.up * this.speed * -1;
     }
 
     void OnTriggerEnter2D(Collider2D other)
