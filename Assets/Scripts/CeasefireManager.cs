@@ -113,7 +113,7 @@ public class CeasefireManager : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(timeLeft / 60);
         int seconds = Mathf.FloorToInt(timeLeft % 60);
-        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timerText.text = seconds.ToString();
         timerText.color = timeLeft <= 2f ? Color.red : Color.white;
     }
 
