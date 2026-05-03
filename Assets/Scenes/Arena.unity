@@ -1189,6 +1189,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8219688754123729687, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
   m_PrefabInstance: {fileID: 2074340553}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &248375140 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2997165246291271281, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+  m_PrefabInstance: {fileID: 2074340553}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248375133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a9990c7601b4f948daa6fc081ea2e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
 --- !u!1001 &256610463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1237,6 +1248,18 @@ PrefabInstance:
       propertyPath: onPlayerButton_Y.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2997165246291271281, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: turret
+      value: 
+      objectReference: {fileID: 1267585545}
+    - target: {fileID: 2997165246291271281, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: display
+      value: 
+      objectReference: {fileID: 1860164742}
+    - target: {fileID: 2997165246291271281, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: respawner
+      value: 
+      objectReference: {fileID: 102214360}
     - target: {fileID: 3308519254579872422, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
       propertyPath: m_Name
       value: Tank Green
@@ -2363,6 +2386,18 @@ PrefabInstance:
       propertyPath: onPlayerButton_Y.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2997165246291271281, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: turret
+      value: 
+      objectReference: {fileID: 105152266}
+    - target: {fileID: 2997165246291271281, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: display
+      value: 
+      objectReference: {fileID: 965524734}
+    - target: {fileID: 2997165246291271281, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: respawner
+      value: 
+      objectReference: {fileID: 102214360}
     - target: {fileID: 3308519254579872422, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
       propertyPath: m_Name
       value: Tank Yellow
@@ -2793,17 +2828,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &568979930 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6881538536759051420, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
-  m_PrefabInstance: {fileID: 478902612}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56a9990c7601b4f948daa6fc081ea2e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Health
 --- !u!1001 &572166517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2926,16 +2950,16 @@ MonoBehaviour:
   threshold: 2
   tanks:
   - entity: {fileID: 1016879035}
-    health: {fileID: 568979930}
+    health: {fileID: 0}
     input: {fileID: 562433551}
   - entity: {fileID: 1746319320}
-    health: {fileID: 1195761919}
+    health: {fileID: 0}
     input: {fileID: 1156686810}
   - entity: {fileID: 690024299}
-    health: {fileID: 1748874358}
+    health: {fileID: 0}
     input: {fileID: 582808282}
   - entity: {fileID: 248375133}
-    health: {fileID: 1945805175}
+    health: {fileID: 0}
     input: {fileID: 1267931365}
   totalPlayers: 4
   ceasefireCooldown: 5
@@ -3458,6 +3482,92 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8219688754123729687, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
   m_PrefabInstance: {fileID: 2011883959}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &690024306 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2997165246291271281, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+  m_PrefabInstance: {fileID: 2011883959}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690024299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a9990c7601b4f948daa6fc081ea2e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+--- !u!1 &712952610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 712952613}
+  - component: {fileID: 712952612}
+  - component: {fileID: 712952611}
+  m_Layer: 5
+  m_Name: Right Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &712952611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712952610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &712952612
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712952610}
+  m_CullTransparentMesh: 1
+--- !u!224 &712952613
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712952610}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2057483935}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 849.68176, y: 36.978027}
+  m_SizeDelta: {x: -2100.1133, y: -190.37}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &719042129
 GameObject:
   m_ObjectHideFlags: 0
@@ -4998,6 +5108,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8219688754123729687, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
   m_PrefabInstance: {fileID: 478902612}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1016879042 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2997165246291271281, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+  m_PrefabInstance: {fileID: 478902612}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016879035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a9990c7601b4f948daa6fc081ea2e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
 --- !u!1001 &1020191002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6404,17 +6525,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172226187}
   m_CullTransparentMesh: 1
---- !u!114 &1195761919 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6881538536759051420, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
-  m_PrefabInstance: {fileID: 256610463}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56a9990c7601b4f948daa6fc081ea2e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Health
 --- !u!4 &1200676981 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1930912329181614887, guid: 75b6caf71c55f4dd48d938ff20f4569f, type: 3}
@@ -6496,7 +6606,7 @@ MonoBehaviour:
   leftBomb: {fileID: 1963962671}
   rightTankImage: {fileID: 599603749}
   rightBomb: {fileID: 1102244864}
-  timerText: {fileID: 931376658}
+  timerText: {fileID: 0}
   countdownDuration: 30
   delay: 3
   resultBanner: {fileID: 0}
@@ -6510,16 +6620,16 @@ MonoBehaviour:
   redColor: {r: 0.8196079, g: 0.1254902, b: 0.1254902, a: 1}
   tanks:
   - shooter: {fileID: 611479352}
-    health: {fileID: 568979930}
+    health: {fileID: 1016879042}
     renderer: {fileID: 1620059639}
   - shooter: {fileID: 1636959413}
-    health: {fileID: 1195761919}
+    health: {fileID: 1746319327}
     renderer: {fileID: 1075787937}
   - shooter: {fileID: 1028375522}
-    health: {fileID: 1748874358}
+    health: {fileID: 690024306}
     renderer: {fileID: 1747544768}
   - shooter: {fileID: 1261982669}
-    health: {fileID: 1945805175}
+    health: {fileID: 248375140}
     renderer: {fileID: 1144022049}
   debug: 0
 --- !u!1 &1267585545 stripped
@@ -7505,11 +7615,11 @@ RectTransform:
   - {fileID: 1717764775}
   - {fileID: 1172226188}
   - {fileID: 1066268437}
-  - {fileID: 931376657}
   - {fileID: 1639466179}
   - {fileID: 1327935976}
   - {fileID: 1963962670}
   - {fileID: 1102244863}
+  - {fileID: 931376657}
   m_Father: {fileID: 2057483935}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -9062,22 +9172,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8219688754123729687, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
   m_PrefabInstance: {fileID: 256610463}
   m_PrefabAsset: {fileID: 0}
---- !u!212 &1747544768 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 8930264680089808671, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
-  m_PrefabInstance: {fileID: 2011883959}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1748874358 stripped
+--- !u!114 &1746319327 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6881538536759051420, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
-  m_PrefabInstance: {fileID: 2011883959}
+  m_CorrespondingSourceObject: {fileID: 2997165246291271281, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+  m_PrefabInstance: {fileID: 256610463}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1746319320}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56a9990c7601b4f948daa6fc081ea2e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
+--- !u!212 &1747544768 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8930264680089808671, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+  m_PrefabInstance: {fileID: 2011883959}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1759775252 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 870027423092706912, guid: 852198bc984f741edaae361d1779dd90, type: 3}
@@ -9806,17 +9916,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 870027423092706912, guid: 852198bc984f741edaae361d1779dd90, type: 3}
   m_PrefabInstance: {fileID: 195342741}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1945805175 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6881538536759051420, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
-  m_PrefabInstance: {fileID: 2074340553}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56a9990c7601b4f948daa6fc081ea2e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Health
 --- !u!1 &1947177661
 GameObject:
   m_ObjectHideFlags: 0
@@ -10231,6 +10330,18 @@ PrefabInstance:
       propertyPath: onPlayerButton_Y.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2997165246291271281, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: turret
+      value: 
+      objectReference: {fileID: 1404838528}
+    - target: {fileID: 2997165246291271281, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: display
+      value: 
+      objectReference: {fileID: 731605232}
+    - target: {fileID: 2997165246291271281, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: respawner
+      value: 
+      objectReference: {fileID: 102214360}
     - target: {fileID: 3308519254579872422, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
       propertyPath: m_Name
       value: Tank Blue
@@ -10479,6 +10590,7 @@ RectTransform:
   - {fileID: 1363060843}
   - {fileID: 185906334}
   - {fileID: 599603748}
+  - {fileID: 712952613}
   m_Father: {fileID: 1673825983}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -10534,6 +10646,18 @@ PrefabInstance:
       propertyPath: onPlayerButton_Y.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2997165246291271281, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: turret
+      value: 
+      objectReference: {fileID: 1201252253}
+    - target: {fileID: 2997165246291271281, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: display
+      value: 
+      objectReference: {fileID: 144864312}
+    - target: {fileID: 2997165246291271281, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
+      propertyPath: respawner
+      value: 
+      objectReference: {fileID: 102214360}
     - target: {fileID: 3308519254579872422, guid: 0f92c1db000a04a82ada4b9ccbd13369, type: 3}
       propertyPath: m_Name
       value: Tank Red

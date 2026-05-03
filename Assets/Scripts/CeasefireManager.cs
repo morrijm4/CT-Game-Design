@@ -103,7 +103,6 @@ public class CeasefireManager : MonoBehaviour
                 rightPlayerChoice = Choice.Cooperate;  // X button
             else if (Gamepad.all[rhs].buttonEast.wasPressedThisFrame)
                 rightPlayerChoice = Choice.Attack;     // B button
-            Debug.Log($"P2 Input Detected: {Gamepad.all[rhs].buttonWest.wasPressedThisFrame} | {Gamepad.all[rhs].buttonEast.wasPressedThisFrame}");
         }
 
         if (debug) Debug.Log($"P1 {GetLHS()} Choice: {leftPlayerChoice} | P2 {GetRHS()} Choice: {rightPlayerChoice}");
@@ -114,7 +113,7 @@ public class CeasefireManager : MonoBehaviour
         int minutes = Mathf.FloorToInt(timeLeft / 60);
         int seconds = Mathf.FloorToInt(timeLeft % 60);
         timerText.text = seconds.ToString();
-        timerText.color = timeLeft <= 2f ? Color.red : Color.white;
+        timerText.color = timeLeft <= 5f ? Color.red : Color.white;
     }
 
     void EndGame()
@@ -162,7 +161,7 @@ public class CeasefireManager : MonoBehaviour
             message = "WAR!\nBoth players attack.";
         }
 
-        tanks[GetLHS()].shooter.Add(lhsScore); 
+        tanks[GetLHS()].shooter.Add(lhsScore);
         tanks[GetRHS()].shooter.Add(rhsScore);
 
         // Display scores on panels
@@ -179,7 +178,8 @@ public class CeasefireManager : MonoBehaviour
         if (_pairs.Count == 0)
         {
             StartCoroutine(EndCeasefireAfterDelay());
-        } else
+        }
+        else
         {
             StartCoroutine(ResetGameAfterDelay());
         }
@@ -216,7 +216,7 @@ public class CeasefireManager : MonoBehaviour
 
         Color lhsColor = tanks[lhs].renderer.color;
         Color rhsColor = tanks[rhs].renderer.color;
-        
+
         leftTankImage.color = lhsColor;
         rightTankImage.color = rhsColor;
 
@@ -244,6 +244,7 @@ public class CeasefireManager : MonoBehaviour
         {
             for (int j = i + 1; j < tanks.Count; j++)
             {
+                if (debug) Debug.Log($"{tanks[i].health.lives} | {tanks[j].health.lives}");
                 if (tanks[i].health.lives > 0 && tanks[j].health.lives > 0) _pairs.Add((i, j));
             }
         }

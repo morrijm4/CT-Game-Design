@@ -66,7 +66,7 @@ public class MainMenuManager : MonoBehaviour
         loadingScreen.SetActive(true);
 
         // Start loading the game scene in the background
-        AsyncOperation operation = SceneManager.LoadSceneAsync("Arena");
+        AsyncOperation operation = SceneManager.LoadSceneAsync("Instructions");
         operation.allowSceneActivation = false;
 
         float elapsedTime = 0f;
