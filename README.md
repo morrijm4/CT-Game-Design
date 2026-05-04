@@ -29,27 +29,22 @@
 <table>
   <tr>
     <td align="center" width="50%">
-      <strong>Main Menu</strong><br />
       <img src="AdditionalMaterials/MainMenu.png" alt="Main Menu" width="100%" />
     </td>
     <td align="center" width="50%">
-      <strong>Movement Controls</strong><br />
       <img src="AdditionalMaterials/MovementControls.png" alt="Movement Controls" width="100%" />
     </td>
   </tr>
   <tr>
     <td align="center" width="50%">
-      <strong>Ceasefire Betrayal Screen</strong><br />
       <img src="AdditionalMaterials/CeasefireBetrayal.png" alt="Ceasefire Betrayal Screen" width="100%" />
     </td>
     <td align="center" width="50%">
-      <strong>Tank Explosion</strong><br />
       <img src="AdditionalMaterials/TankExplosion.png" alt="Tank Explosion" width="100%" />
     </td>
   </tr>
   <tr>
     <td align="center" width="50%">
-      <strong>Game Over Screen</strong><br />
       <img src="AdditionalMaterials/GameOver.png" alt="Game Over Screen" width="100%" />
     </td>
     <td align="center" width="50%"></td>
