@@ -10,7 +10,7 @@
 
 ## Repository Guide
 
-- `AdditionalMaterials/` contains the final presentation PDF, trailer file, and screenshots.
+- `AdditionalMaterials/` contains the final presentation PDF and gameplay screenshots.
 - `Assets/Scenes/` contains the main Unity scenes: `MainMenu`, `Instructions`, and `Arena`.
 - `Assets/Game Assemblies/Prefabs/Players/Tank.prefab` is the main tank prefab and a useful entry point for understanding how the player object is assembled.
 - `Assets/Scripts/` contains the core gameplay and UI scripts.
