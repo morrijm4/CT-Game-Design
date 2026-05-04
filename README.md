@@ -4,7 +4,7 @@
 
 **Trailer:** [Watch on YouTube](https://www.youtube.com/watch?v=Fko-PupBILw)
 
-`Armistice` is a local multiplayer Unity tank game centered on combat, survival, and brief ceasefire decision moments.
+`Armistice` is a local multiplayer Unity tank game centered on combat, survival, and prisoner dilemma decision moments.
 
 **Builds:** Download playable builds from the [GitHub Releases](https://github.com/morrijm4/CT-Game-Design/releases) section.
 
