@@ -12,8 +12,10 @@
 
 - `AdditionalMaterials/` contains the final presentation PDF, trailer file, and screenshots for evaluation.
 - `Assets/Scenes/` contains the main Unity scenes: `MainMenu`, `Instructions`, and `Arena`.
+- `Assets/Game Assemblies/Prefabs/Players/Tank.prefab` is the main tank prefab and a useful entry point for understanding how the player object is assembled.
 - `Assets/Scripts/` contains the core gameplay and UI scripts.
-- `ProjectSettings/` contains the Unity project configuration.
+  Helpful scripts to review first:
+  `CeasefireManager.cs`, `CeaseFire/CeasefireController.cs`, `Health.cs`, `Projectile.cs`, `Shooter/Shooter.cs`, `Shooter/PelletShooter.cs`, `Shooter/BombShooter.cs`, `ReturnHome.cs`, and `Respawner.cs`.
 
 ## Screenshot Gallery
 
