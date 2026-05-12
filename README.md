@@ -1,80 +1,56 @@
-# Flag Raid
+# Armistice
 
-A 2-player top-down tank game built in Unity using the Game Assemblies library. Players compete to either capture 3 enemy flags or destroy the opponent's tank.
+[![Watch the Armistice trailer](AdditionalMaterials/MainMenu.png)](https://www.youtube.com/watch?v=Fko-PupBILw)
 
----
+**Trailer:** [Watch on YouTube](https://www.youtube.com/watch?v=Fko-PupBILw)
 
-## Win Conditions
+`Armistice` is a local multiplayer Unity tank game centered on combat, survival, and prisoner dilemma decision moments.
 
-- Capture 3 flags from the enemy base and return them to your home base, **or**
-- Reduce the opponent's tank health to zero
+**Builds:** Download playable builds from the [GitHub Releases](https://github.com/morrijm4/CT-Game-Design/releases) section.
 
-Both conditions are live simultaneously. The first player to meet either condition wins.
+## Repository Guide
 
----
+- `AdditionalMaterials/` contains the final presentation PDF and gameplay screenshots.
+- `Assets/Scenes/` contains the main Unity scenes: `MainMenu`, `Instructions`, and `Arena`.
+- `Assets/Game Assemblies/Prefabs/Players/Tank.prefab` is the main tank prefab and a useful entry point for understanding how the player object is assembled.
+- `Assets/Scripts/` contains the core gameplay and UI scripts.
+  Helpful scripts to review first:
+  - `Health.cs`
+  - `Projectile.cs`
+  - `Shooter/Shooter.cs`
+  - `Shooter/PelletShooter.cs`
+  - `Shooter/BombShooter.cs`
+  - `CeasefireManager.cs`
+  - `CeaseFire/CeasefireController.cs`
+  - `Respawner.cs`
 
-## Game Mechanics
+## Screenshot Gallery
 
-```
-[Pellet Station] → collect pellets (max 12) → [Bomb Forge] → craft bombs (4 pellets = 1 bomb, max 1)
-                                                    ↓
-                                          fire at enemy tank  →  -5 HP (pellet) / -30 HP (bomb)
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="AdditionalMaterials/MainMenu.png" alt="Main Menu" width="100%" />
+    </td>
+    <td align="center" width="50%">
+      <img src="AdditionalMaterials/MovementControls.png" alt="Movement Controls" width="100%" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="AdditionalMaterials/CeasefireBetrayal.png" alt="Ceasefire Betrayal Screen" width="100%" />
+    </td>
+    <td align="center" width="50%">
+      <img src="AdditionalMaterials/TankExplosion.png" alt="Tank Explosion" width="100%" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="AdditionalMaterials/GameOver.png" alt="Game Over Screen" width="100%" />
+    </td>
+    <td align="center" width="50%"></td>
+  </tr>
+</table>
 
-[Enemy Base] → pick up flag → drive home → [Home Base] → +1 flag count + health replenished
-```
+## Technical Note
 
----
-
-## Resources
-
-| Resource | Carry Limit | Damage | Description |
-|----------|-------------|--------|-------------|
-| Pellet   | 12 | 5 HP | Basic ammo. Collected from the Pellet Station. Used to shoot or craft bombs. |
-| Bomb     | 1 | 30 HP | Crafted weapon. Costs 4 pellets. Has a small blast radius. |
-| Flag     | 1 | — | Objective item. One per base. Must be carried back to your home base to score. |
-
----
-
-## Stations
-
-| Station | Type | Function |
-|---------|------|----------|
-| Pellet Station | Source | Spawns pellets on a timer near each base |
-| Bomb Forge | Converter | Takes 4 pellets, outputs 1 bomb |
-| Home Base | Output | Accepts returned flags, tracks score, triggers win at 3 flags. Replenishes tank health on visit. |
-
----
-
-## Players
-
-Two players share one keyboard.
-
-| Action | Player 1 | Player 2 |
-|--------|----------|----------|
-| Move | WASD | Arrow Keys |
-| Fire | Space | Enter |
-| Interact with station | E | Numpad 0 |
-
-Each tank starts with **100 HP**. Health does not regenerate.
-
----
-
-## Strategy Notes
-
-- **Aggressive:** Stockpile bombs via the Forge and focus on eliminating the enemy tank.
-- **Objective:** Use pellets defensively while making quick flag runs to win on captures.
-- **Mixed:** At 2 flags, the enemy must abandon their strategy to stop you — use this pressure.
-
----
-
-## Tech Stack
-
-- Unity 2D (top-down)
-- Game Assemblies Library for resource and station management
-- Single-machine local multiplayer
-
----
-
-## Team
-
-Cornell Tech — Resource Management Simulation Assignment
+- Unity version: `6000.3.9f1`
